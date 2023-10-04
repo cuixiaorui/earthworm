@@ -5,8 +5,11 @@ function main() {
   let dataBuffer = fs.readFileSync("./01.pdf");
 
   pdf(dataBuffer).then(function (data) {
+    //     fs.writeFileSync("./01-raw.json", JSON.stringify(data.text));
     const result = parse(data.text);
-    console.log(result);
+    //     console.log(result);
+
+    fs.writeFileSync("./01.json", JSON.stringify(result));
   });
 }
 
@@ -29,28 +32,59 @@ function parse(text) {
     .slice(startIndex + 1)
     .filter((t) => t && !/\d/.test(Number(t)));
 
-  // 对齐格式
-  // TODO
-  // 如果当前是英文的话  那么检测下一行是不是中文， 
-  // 如果不是中文的话 那么需要把这行的内容合并到当前行，并且删除掉这一个元素
-
   // 3. 成组 2个为一组  （中文 / 英文+音标）
   const result = [];
+
   for (let i = 0; i < textList.length; i++) {
-    const chinese = textList[i];
-    //解析 英文+ 音标   -》 基于空白符去切 遇到"/" 就说明是音标
-    const { english, soundMark } = parseEnglishAndSoundMark(textList[i + 1]);
+    let data = {
+      chinese: "",
+      english: "",
+      soundMark: "",
+    };
 
-    result.push({
-      chinese,
-      english,
-      soundMark,
-    });
+    function run() {
+      const element = textList[i];
+      let chinese = "";
+      let englishAndSoundMark = "";
 
+      if (isChinese(element)) {
+        chinese += element;
+        while (isChinese(textList[i + 1])) {
+          chinese += "，" + textList[i + 1];
+          i++;
+        }
+
+        data.chinese = chinese;
+      } else {
+        englishAndSoundMark += element;
+
+        while (textList[i + 1] && !isChinese(textList[i + 1])) {
+          englishAndSoundMark += " " + textList[i + 1];
+          i++;
+        }
+
+        const { english, soundMark } =
+          parseEnglishAndSoundMark(englishAndSoundMark);
+
+        data.english = english;
+        data.soundMark = soundMark;
+      }
+    }
+
+    run();
+    console.log(data);
     i++;
+    run();
+
+    result.push(data);
   }
 
   return result;
+}
+
+function isChinese(str) {
+  const reg = /^[\u4e00-\u9fa5]/;
+  return reg.test(str);
 }
 
 function parseEnglishAndSoundMark(text) {
