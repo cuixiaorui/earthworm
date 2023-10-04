@@ -29,10 +29,15 @@ export default function Main() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("http://localhost:3001/api/main");
+      const basePath =
+        process.env.NODE_ENV === "production"
+          ? "/api"
+          : "http://localhost:3001/api";
+
+      const response = await fetch(basePath + "/main");
       const data = await response.json();
       currentCourse.current = data.data;
-      updateWord()
+      updateWord();
     }
     fetchData();
   }, []);
@@ -44,7 +49,7 @@ export default function Main() {
   const handleToNextStatement = () => {
     statementIndex.current++;
     setCurrentMode("question");
-    updateWord()
+    updateWord();
   };
 
   const handleCheckAnswer = (userInput: string) => {
