@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState ,createRef} from "react";
 import Question from "../../components/Question";
 import Answer from "../../components/Answer";
 
 const failedCountTotal = 3;
+
+const inputRef:any = createRef()
 
 export default function Main() {
   const [currentMode, setCurrentMode] = useState<"question" | "answer">(
@@ -38,6 +40,7 @@ export default function Main() {
       const data = await response.json();
       currentCourse.current = data.data;
       updateWord();
+      inputRef.current.focus()
     }
     fetchData();
   }, []);
@@ -50,6 +53,7 @@ export default function Main() {
     statementIndex.current++;
     setCurrentMode("question");
     updateWord();
+    inputRef.current.focus()
   };
 
   const handleCheckAnswer = (userInput: string) => {
@@ -57,7 +61,6 @@ export default function Main() {
       setCurrentMode("answer");
     } else {
       failedCount.current++;
-
       if (failedCount.current >= failedCountTotal) {
         failedCount.current = 0;
         setCurrentMode("answer");
@@ -65,19 +68,23 @@ export default function Main() {
     }
   };
   return (
-    <div>
-      {currentMode === "question" ? (
-        <Question
-          word={questionWord}
-          onCheckAnswer={handleCheckAnswer}
-        ></Question>
-      ) : (
-        <Answer
-          word={answerWord}
-          soundmark={answerSoundmark}
-          onToNextStatement={handleToNextStatement}
-        ></Answer>
-      )}
+    <div id="app">
+      <div className="main">
+        {
+          <Question
+            createRef = {inputRef}
+            word={questionWord}
+            onCheckAnswer={handleCheckAnswer}
+            onToNextStatement={handleToNextStatement}
+          ></Question>
+        }
+        {currentMode !== "question" && (
+          <Answer
+            word={answerWord}
+            soundmark={answerSoundmark}
+          ></Answer>
+        )}
+      </div>
     </div>
   );
 }

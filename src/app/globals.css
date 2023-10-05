@@ -18,10 +18,52 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: #faf9ff;
+}
+
+
+#app {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.main {
+  margin-top: 30vh;
+}
+
+.input {
+  height: 6vh;
+  color: #3cb73c;
+  font-size: max(2vw,24px);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.word {
+  width: 88%;
+  text-align: center;
+  font-size: max(3vw,28px);
+  color: rgba(32,32,32,0.6);
+}
+
+.english {
+  width: 88%;
+  text-align: center;
+  font-size: max(2.4vw,24px);
+  color: rgba(32,32,32,0.6);
+}
+
+.soundMark {
+  width: 88%;
+  text-align: center;
+  font-size: max(1.2vw,16px);
+  color: rgba(32,32,32,0.4);
+}
+
+.btn {
+  margin-left: 4px;
+  font-size: max(1.4vw,20px);
+  color: rgba(32,32,32,0.6);
+  vertical-align: text-bottom;
 }
