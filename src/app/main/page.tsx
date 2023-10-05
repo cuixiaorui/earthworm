@@ -29,12 +29,7 @@ export default function Main() {
 
   useEffect(() => {
     async function fetchData() {
-      const basePath =
-        process.env.NODE_ENV === "production"
-          ? "/api"
-          : "http://localhost:3001/api";
-
-      const response = await fetch(basePath + "/main");
+      const response = await fetch("/api/main");
       const data = await response.json();
       currentCourse.current = data.data;
       updateWord();
@@ -87,7 +82,7 @@ export default function Main() {
             </div>
           </div>
         </div>
-          <Statistics />
+        <Statistics />
       </div>
     </div>
   );
