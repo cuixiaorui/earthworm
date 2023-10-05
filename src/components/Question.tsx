@@ -20,15 +20,18 @@ export default function Question({
   };
 
   return (
-    <div>
-      {word}
-      <input
-        className="bg-red-500"
-        type="text"
-        value={inputValue}
-        onChange={handleInputChange}
-        onKeyDown={handleKeyDown}
-      />
-    </div>
+      <div className="text-5xl text-center mb-20 mt-10">
+        <div>
+          {word}
+        </div>
+        <input
+          className="border-solid border-2 border-sky-500 bg-slate-100 rounded-lg mt-8 mb-11 indent-1 h-10 text-2xl"
+          type="text"
+          value={inputValue}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
+          autoFocus
+        />
+      </div>
   );
 }
