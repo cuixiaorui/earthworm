@@ -29,7 +29,7 @@ export default function Answer({
   
   return (
     <div className="text-center mb-20 mt-10">
-      <div className="text-5xl mb-3">
+      <div className="text-5xl mb-3 text-fuchsia-500">
         {word}
         <svg
           className="w-7 h-7 inline-block ml-1 cursor-pointer"
