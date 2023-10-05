@@ -39,13 +39,13 @@ function parse(text) {
     let data = {
       chinese: "",
       english: "",
-      soundMark: "",
+      soundmark: "",
     };
 
     function run() {
       const element = textList[i];
       let chinese = "";
-      let englishAndSoundMark = "";
+      let englishAndSoundmark = "";
 
       if (isChinese(element)) {
         chinese += element;
@@ -56,18 +56,18 @@ function parse(text) {
 
         data.chinese = chinese;
       } else {
-        englishAndSoundMark += element;
+        englishAndSoundmark += element;
 
         while (textList[i + 1] && !isChinese(textList[i + 1])) {
-          englishAndSoundMark += " " + textList[i + 1];
+          englishAndSoundmark += " " + textList[i + 1];
           i++;
         }
 
-        const { english, soundMark } =
-          parseEnglishAndSoundMark(englishAndSoundMark);
+        const { english, soundmark } =
+          parseEnglishAndSoundmark(englishAndSoundmark);
 
         data.english = english;
-        data.soundMark = soundMark;
+        data.soundmark = soundmark;
       }
     }
 
@@ -87,16 +87,16 @@ function isChinese(str) {
   return reg.test(str);
 }
 
-function parseEnglishAndSoundMark(text) {
+function parseEnglishAndSoundmark(text) {
   console.log(text);
   const list = text.split(" ");
-  const soundMarkdStartIndex = list.findIndex((t) => t.startsWith("/"));
+  const soundmarkdStartIndex = list.findIndex((t) => t.startsWith("/"));
 
-  const english = list.slice(0, soundMarkdStartIndex).join(" ");
-  const soundMark = list.slice(soundMarkdStartIndex).join(" ");
+  const english = list.slice(0, soundmarkdStartIndex).join(" ");
+  const soundmark = list.slice(soundmarkdStartIndex).join(" ");
 
   return {
     english,
-    soundMark,
+    soundmark,
   };
 }
