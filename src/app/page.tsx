@@ -1,70 +1,40 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Question from "../components/Question";
 import Answer from "../components/Answer";
 import Statistics from "@/components/Statistics";
-
-const failedCountTotal = 3;
+import { useCourse, useFailedCount } from "../store/useCourse";
 
 export default function Home() {
-  const [currentMode, setCurrentMode] = useState<
-    "loading" | "question" | "answer"
-  >("loading");
+  const [currentMode, setCurrentMode] = useState<"question" | "answer">(
+    "question"
+  );
 
-  const failedCount = useRef(0);
-  const statementIndex = useRef(0);
-  const currentCourse = useRef<any>({});
-
-  let questionWord = "";
-  let answerWord = "";
-  let answerSoundmark = "";
+  const { increaseFailedCount, resetFailedCount } = useFailedCount();
+  const { toNextStatement, fetchCourse, getCurrentStatement, checkCorrect } =
+    useCourse();
 
 
   useEffect(() => {
-    async function fetchData() {
-      const response = await fetch("/api/main");
-      const data = await response.json();
-      currentCourse.current = data.data;
-      setCurrentMode("question");
-    }
-    fetchData();
+    fetchCourse();
   }, []);
 
-  const updateWord = () => {
-    if (!currentCourse.current.statements) return;
-
-    const { chinese, english, soundMark } =
-      currentCourse.current.statements[statementIndex.current];
-
-    questionWord = chinese;
-    answerWord = english;
-    answerSoundmark = soundMark;
-  };
-
-  const checkCorrect = (input: string) => {
-    return input === answerWord;
-  };
-
   const handleToNextStatement = () => {
-    statementIndex.current++;
+    toNextStatement();
     setCurrentMode("question");
   };
 
   const handleCheckAnswer = (userInput: string) => {
     if (checkCorrect(userInput)) {
       setCurrentMode("answer");
+      resetFailedCount()
     } else {
-      failedCount.current++;
-
-      if (failedCount.current >= failedCountTotal) {
-        failedCount.current = 0;
+      increaseFailedCount(() => {
         setCurrentMode("answer");
-      }
+      });
     }
   };
-
-  updateWord();
 
   return (
     <div className="container mx-auto flex h-full flex-1 flex-col items-center justify-center pb-10 h-96">
@@ -75,13 +45,13 @@ export default function Home() {
               <div className="flex flex-col items-center justify-center pb-1 pt-4">
                 {currentMode === "question" ? (
                   <Question
-                    word={questionWord}
+                    word={getCurrentStatement()?.chinese || ""}
                     onCheckAnswer={handleCheckAnswer}
                   ></Question>
                 ) : (
                   <Answer
-                    word={answerWord}
-                    soundmark={answerSoundmark}
+                    word={getCurrentStatement()?.english || ""}
+                    soundmark={getCurrentStatement()?.soundmark || ""}
                     onToNextStatement={handleToNextStatement}
                   ></Answer>
                 )}

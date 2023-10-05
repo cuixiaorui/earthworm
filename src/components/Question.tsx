@@ -15,23 +15,21 @@ export default function Question({
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       onCheckAnswer(inputValue);
-      setInputValue("")
+      setInputValue("");
     }
   };
 
   return (
-      <div className="text-5xl text-center mb-20 mt-10">
-        <div className="text-fuchsia-500">
-          {word}
-        </div>
-        <input
-          className="border-solid border-2 border-sky-500 bg-fuchsia-500 rounded-lg mt-8 mb-11 indent-1 h-10 text-2xl "
-          type="text"
-          value={inputValue}
-          onChange={handleInputChange}
-          onKeyDown={handleKeyDown}
-          autoFocus
-        />
-      </div>
+    <div className="text-5xl text-center mb-20 mt-10">
+      <div className="text-fuchsia-500">{word}</div>
+      <input
+        className="border-solid border-2 border-sky-500 bg-fuchsia-500 rounded-lg mt-8 mb-11 indent-1 h-10 text-2xl "
+        type="text"
+        value={inputValue}
+        onChange={handleInputChange}
+        onKeyDown={handleKeyDown}
+        autoFocus
+      />
+    </div>
   );
 }
