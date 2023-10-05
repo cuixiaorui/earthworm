@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Question from "../components/Question";
-import Answer from "../components/Answer";
+import Question from "@/components/Question";
+import Answer from "@/components/Answer";
 import Statistics from "@/components/Statistics";
-import { useCourse, useFailedCount } from "../store/useCourse";
+import { useCourse, useFailedCount } from "@/store";
 
 export default function Home() {
   const [currentMode, setCurrentMode] = useState<"question" | "answer">(
@@ -14,7 +14,6 @@ export default function Home() {
   const { increaseFailedCount, resetFailedCount } = useFailedCount();
   const { toNextStatement, fetchCourse, getCurrentStatement, checkCorrect } =
     useCourse();
-
 
   useEffect(() => {
     fetchCourse();
