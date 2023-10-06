@@ -29,7 +29,7 @@ export default function Answer({
   
   return (
     <div className="text-center mb-20 mt-10">
-      <div className="text-5xl mb-3 text-fuchsia-500">
+      <div className="text-5xl mb-3 text-fuchsia-500 dark:text-gray-50">
         {word}
         <svg
           className="w-7 h-7 inline-block ml-1 cursor-pointer"
@@ -49,7 +49,7 @@ export default function Answer({
       <div className="text-2xl text-slate-600">
         {soundmark}
       </div>
-      <button className="border-solid border-2 border-slate-400 bg-slate-100 rounded-lg mt-8 mb-11 indent-1 h-10 text-2xl pl-10 pr-10 hover:bg-slate-200" onClick={() => onToNextStatement()} >next</button>
+      <button className="border-solid border-2 border-slate-400 bg-slate-100 dark:bg-fuchsia-500 rounded-lg mt-8 mb-11 indent-1 h-10 text-2xl pl-10 pr-10 hover:bg-slate-200" onClick={() => onToNextStatement()} >next</button>
     </div>
   );
 }

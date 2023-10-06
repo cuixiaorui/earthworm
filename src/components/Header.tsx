@@ -19,10 +19,10 @@ export default function Header() {
             </span>
           </h1>
         </a>
-        <nav className="flex w-auto content-center items-center justify-end space-x-3 rounded-xl bg-gray-50 p-4 transition-colors duration-300 dark:bg-gray-800">
+        <nav className="my-card flex w-auto content-center items-center justify-end space-x-3 rounded-xl bg-white p-4 transition-colors duration-300 dark:bg-gray-800">
           <div className="relative">
             <div>
-              <a className="block rounded-lg px-3 py-1 text-lg transition-colors duration-300 ease-in-out hover:bg-indigo-400 hover:text-white focus:outline-none dark:text-white dark:text-opacity-60 dark:hover:text-opacity-100"
+              <a className="block rounded-lg px-3 py-1 text-lg transition-colors duration-300 ease-in-out text-gray-600/50 hover:bg-indigo-400 hover:text-white focus:outline-none dark:text-white dark:text-opacity-60 dark:hover:text-opacity-100"
                 href="">
                 第一课
               </a>
