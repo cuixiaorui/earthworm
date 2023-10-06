@@ -1,5 +1,6 @@
 // https://nextjs.org/docs/app/building-your-application/optimizing/static-assets
 import Image from 'next/image';
+import ThemeChanger from '@/components/ThemeChanger';
 
 export default function Header() {
   // TODO:获取当前Main中请求来的课程名称并显示，后续还可以点击切换
@@ -65,18 +66,7 @@ export default function Header() {
               </div>
             </div>
             <div className="relative h-7 w-7">
-              <div>
-                <button className="p-[2px] text-lg text-indigo-500 focus:outline-none" type="button" aria-label="开关深色模式">
-                  <svg viewBox="0 0 24 24" width="1.2em" height="1.2em" className="icon">
-                    <path fill="currentColor" d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0a4.5 4.5 0 0 1-9 0Zm11.394-5.834a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75Zm-3.916 6.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18Zm-4.242-.697a.75.75 0 0 0-1.061-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12Zm.697-4.243a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z"></path>
-                  </svg>
-                </button>
-              </div>
-              <div className="opacity-0 bottom-full pb-2 pointer-events-none absolute left-1/2 flex -translate-x-1/2 transform items-center justify-center transition-opacity hover:bg-blue-800">
-                <span className="tooltip">
-                  开关深色模式
-                </span>
-              </div>
+              <ThemeChanger />
             </div>
           </div>
         </nav>
