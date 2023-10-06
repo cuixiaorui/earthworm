@@ -12,7 +12,7 @@ export default function Header() {
           <h1 className="flex items-center align-middle">
             {/* Image required properties: https://stackoverflow.com/questions/75781160/next-image-component-gives-error-missing-required-width-property-when-runni */}
             <section className="relative w-12 h-12 mr-2">
-              <Image fill src="/logo.png" alt="logo" />
+              <Image fill src="/logo.png" alt="logo" sizes="1" />
             </section>
             <span>
               Earth Worm
