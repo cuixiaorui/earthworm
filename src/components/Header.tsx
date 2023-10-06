@@ -1,12 +1,21 @@
+// https://nextjs.org/docs/app/building-your-application/optimizing/static-assets
+import Image from 'next/image';
+
 export default function Header() {
   // TODO:获取当前Main中请求来的课程名称并显示，后续还可以点击切换
   return (
     <header className="container z-20 mx-auto w-full px-10 py-6">
       <div className="flex w-full flex-col items-center justify-between space-y-3 lg:flex-row lg:space-y-0">
         <a className="flex items-center text-2xl font-bold text-indigo-500 no-underline hover:no-underline lg:text-4xl"
-          href="https://earthworm-six.vercel.app/main">
-          <h1>
-            Earth Worm
+          href="/main">
+          <h1 className="flex items-center align-middle">
+            {/* Image required properties: https://stackoverflow.com/questions/75781160/next-image-component-gives-error-missing-required-width-property-when-runni */}
+            <section className="relative w-12 h-12 mr-2">
+              <Image fill src="/logo.jpg" alt="logo" />
+            </section>
+            <span>
+              Earth Worm
+            </span>
           </h1>
         </a>
         <nav className="flex w-auto content-center items-center justify-end space-x-3 rounded-xl bg-gray-50 p-4 transition-colors duration-300 dark:bg-gray-800">
