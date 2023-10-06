@@ -14,7 +14,7 @@ export default function Question({
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      onCheckAnswer(inputValue);
+      onCheckAnswer(inputValue.trim());
       setInputValue("");
     }
   };
