@@ -1,8 +1,26 @@
 // https://nextjs.org/docs/app/building-your-application/optimizing/static-assets
+"use client"
 import Image from 'next/image';
+import { useDarkMode } from '@/store/index'
+import { useEffect, useRef } from 'react';
 
 export default function Header() {
   // TODO:获取当前Main中请求来的课程名称并显示，后续还可以点击切换
+
+  const { isDarkMode, setDarkMode } = useDarkMode();
+  const bodyRef = useRef(document.body)
+  const handleToggle = () => {  
+    setDarkMode(!isDarkMode);  
+  };
+
+  useEffect(() => {  
+    if (isDarkMode) {  
+      bodyRef.current.classList.add('dark', 'bg-black');  
+    } else {  
+      bodyRef.current.classList.remove('dark', 'bg-black');  
+    }  
+  }, [isDarkMode]);
+
   return (
     <header className="container z-20 mx-auto w-full px-10 py-6">
       <div className="flex w-full flex-col items-center justify-between space-y-3 lg:flex-row lg:space-y-0">
@@ -64,7 +82,7 @@ export default function Header() {
                 </span>
               </div>
             </div>
-            <div className="relative h-7 w-7">
+            <div className="relative h-7 w-7" onClick={ handleToggle }>
               <div>
                 <button className="p-[2px] text-lg text-indigo-500 focus:outline-none" type="button" aria-label="开关深色模式">
                   <svg viewBox="0 0 24 24" width="1.2em" height="1.2em" className="icon">
