@@ -45,7 +45,7 @@ export default function Home() {
               <div className="flex flex-col items-center justify-center pb-1 pt-4">
                 {currentMode === "question" ? (
                   <Question
-                    word={getCurrentStatement()?.chinese || ""}
+                    word={getCurrentStatement()?.chinese || "加载中..."}
                     onCheckAnswer={handleCheckAnswer}
                   ></Question>
                 ) : (
