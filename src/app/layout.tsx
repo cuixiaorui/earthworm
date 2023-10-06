@@ -19,7 +19,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeProvider>
+        <ThemeProvider
+           attribute="class">
           <div className="flex flex-col">
             <div className='mb-20'>
               <Header />
