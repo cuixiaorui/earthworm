@@ -35,6 +35,8 @@ export default function Home() {
     }
   };
 
+  const lineNum = getCurrentStatement()?.english.split(' ').length || 1
+
   return (
     <div className="container mx-auto flex h-full flex-1 flex-col items-center justify-center pb-10 h-96">
       <div className="container relative mx-auto flex h-full flex-col items-center">
@@ -45,6 +47,7 @@ export default function Home() {
                 {currentMode === "question" ? (
                   <Question
                     word={getCurrentStatement()?.chinese || "加载中..."}
+                    lineNum = {lineNum}
                     onCheckAnswer={handleCheckAnswer}
                   ></Question>
                 ) : (
