@@ -27,7 +27,7 @@ export default function Home() {
   const handleCheckAnswer = (userInput: string) => {
     if (checkCorrect(userInput)) {
       setCurrentMode("answer");
-      resetFailedCount()
+      resetFailedCount();
     } else {
       increaseFailedCount(() => {
         setCurrentMode("answer");
