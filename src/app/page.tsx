@@ -1,39 +1,36 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
-import Question from "@/components/Question";
-import Answer from "@/components/Answer";
-import Statistics from "@/components/Statistics";
-import { useCourse, useFailedCount } from "@/store";
+import { useEffect, useState } from 'react'
+import Question from '@/components/Question'
+import Answer from '@/components/Answer'
+import Statistics from '@/components/Statistics'
+import { useCourse, useFailedCount } from '@/store'
 
 export default function Home() {
-  const [currentMode, setCurrentMode] = useState<"question" | "answer">(
-    "question"
-  );
+  const [currentMode, setCurrentMode] = useState<'question' | 'answer'>('question')
 
-  const { increaseFailedCount, resetFailedCount } = useFailedCount();
-  const { toNextStatement, fetchCourse, getCurrentStatement, checkCorrect } =
-    useCourse();
+  const { increaseFailedCount, resetFailedCount } = useFailedCount()
+  const { toNextStatement, fetchCourse, getCurrentStatement, checkCorrect } = useCourse()
 
   useEffect(() => {
-    fetchCourse();
-  }, []);
+    fetchCourse()
+  }, [])
 
   const handleToNextStatement = () => {
-    toNextStatement();
-    setCurrentMode("question");
-  };
+    toNextStatement()
+    setCurrentMode('question')
+  }
 
   const handleCheckAnswer = (userInput: string) => {
     if (checkCorrect(userInput)) {
-      setCurrentMode("answer");
-      resetFailedCount();
+      setCurrentMode('answer')
+      resetFailedCount()
     } else {
       increaseFailedCount(() => {
-        setCurrentMode("answer");
-      });
+        setCurrentMode('answer')
+      })
     }
-  };
+  }
 
   const lineNum = getCurrentStatement()?.english.split(' ').length || 1
 
@@ -44,18 +41,16 @@ export default function Home() {
           <div className="container flex h-full w-full flex-col items-center justify-center">
             <div className="container flex flex-grow flex-col items-center justify-center">
               <div className="flex flex-col items-center justify-center pb-1 pt-4">
-                {currentMode === "question" ? (
+                {currentMode === 'question' ? (
                   <Question
-                    word={getCurrentStatement()?.chinese || "加载中..."}
-                    lineNum = {lineNum}
-                    onCheckAnswer={handleCheckAnswer}
-                  ></Question>
+                    word={getCurrentStatement()?.chinese || '加载中...'}
+                    lineNum={lineNum}
+                    onCheckAnswer={handleCheckAnswer}></Question>
                 ) : (
                   <Answer
-                    word={getCurrentStatement()?.english || ""}
-                    soundmark={getCurrentStatement()?.soundmark || ""}
-                    onToNextStatement={handleToNextStatement}
-                  ></Answer>
+                    word={getCurrentStatement()?.english || ''}
+                    soundmark={getCurrentStatement()?.soundmark || ''}
+                    onToNextStatement={handleToNextStatement}></Answer>
                 )}
               </div>
             </div>
@@ -64,5 +59,5 @@ export default function Home() {
         <Statistics />
       </div>
     </div>
-  );
+  )
 }

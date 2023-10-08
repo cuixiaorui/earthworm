@@ -1,9 +1,9 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client'
 
 export async function POST(req: Request) {
-  const prisma = new PrismaClient();
+  const prisma = new PrismaClient()
 
-  const { chinese, english, soundmark, courseId, order } = await req.json();
+  const { chinese, english, soundmark, courseId, order } = await req.json()
 
   const statement = await prisma.statement.create({
     data: {
@@ -13,7 +13,7 @@ export async function POST(req: Request) {
       soundmark,
       courseId,
     },
-  });
+  })
 
-  return Response.json({ status: 1, data: statement });
+  return Response.json({ status: 1, data: statement })
 }

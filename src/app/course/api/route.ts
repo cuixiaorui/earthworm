@@ -1,7 +1,7 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client'
 
 export async function GET() {
-  const prisma = new PrismaClient();
+  const prisma = new PrismaClient()
   const courses = await prisma.course.findMany({
     select: {
       id: true,
@@ -15,7 +15,7 @@ export async function GET() {
         },
       },
     },
-  });
+  })
 
-  return Response.json({ statue: 1, data: courses });
+  return Response.json({ statue: 1, data: courses })
 }

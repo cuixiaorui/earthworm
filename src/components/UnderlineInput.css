@@ -12,9 +12,9 @@
   min-height: 6vh;
   text-align: center;
   font-size: 4vw;
-  color: rgba(32,32,32,0.6);
+  color: rgba(32, 32, 32, 0.6);
   border: none;
-  border-bottom: 2px solid rgb(32, 32, 32,0.4);
+  border-bottom: 2px solid rgb(32, 32, 32, 0.4);
   transition: border 0.3s;
   box-sizing: border-box;
   margin-right: 8px;
@@ -31,5 +31,5 @@
 }
 
 .active {
-  border-bottom: 3px solid #1E80FF !important;
+  border-bottom: 3px solid #1e80ff !important;
 }
