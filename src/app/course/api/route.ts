@@ -6,16 +6,20 @@ export async function GET() {
     select: {
       id: true,
       title: true,
-      statements: {
-        select: {
-          id: true,
-          chinese: true,
-          english: true,
-          soundmark: true,
-        },
-      },
     },
   });
 
   return Response.json({ statue: 1, data: courses });
+}
+
+export async function POST(request: Request) {
+  const { title } = await request.json();
+  const prisma = new PrismaClient();
+  const course = await prisma.course.create({
+    data: {
+      title: title,
+    },
+  });
+
+  return Response.json({ statue: 1, data: course });
 }
