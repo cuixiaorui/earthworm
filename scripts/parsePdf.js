@@ -106,7 +106,7 @@ function parseEnglishAndSoundmark(text) {
   const list = text.split(" ");
   const soundmarkdStartIndex = list.findIndex((t) => t.startsWith("/"));
 
-  const english = list.slice(0, soundmarkdStartIndex).join(" ");
+  const english = list.slice(0, soundmarkdStartIndex).join(" ").trim();
 
   let rawSoundmark = list
     .slice(soundmarkdStartIndex)
