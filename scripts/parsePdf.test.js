@@ -1,5 +1,5 @@
 import { it, expect, describe } from "vitest";
-import { parse, parseEnglishAndSoundMark } from "./parsePdf";
+import { parse, parseEnglishAndSoundmark } from "./parsePdf";
 
 it("happy path", () => {
   const pdfText =
@@ -17,12 +17,12 @@ it("happy path", () => {
     {
       chinese: "我",
       english: "I",
-      soundMark: "/aɪ/",
+      soundmark: "/aɪ/",
     },
     {
       chinese: "喜欢",
       english: "like",
-      soundMark: "/laɪk/",
+      soundmark: "/laɪk/",
     },
   ]);
 });
@@ -46,17 +46,17 @@ it("complex", () => {
     {
       chinese: "我",
       english: "I",
-      soundMark: "/aɪ/",
+      soundmark: "/aɪ/",
     },
     {
       chinese: "我需要告诉你重要的某些事情",
       english: "I need to tell you something important",
-      soundMark: "/ai/ /nid/ /te/",
+      soundmark: "/ai/ /nid/ /te/",
     },
     {
       chinese: "喜欢",
       english: "like",
-      soundMark: "/laɪk/",
+      soundmark: "/laɪk/",
     },
   ]);
 });
@@ -75,28 +75,35 @@ it("中文里面包含符号", () => {
     {
       chinese: "我",
       english: "I",
-      soundMark: "/aɪ/",
+      soundmark: "/aɪ/",
     },
     {
       chinese: "它；这件事情",
       english: "it",
-      soundMark: "/it/",
+      soundmark: "/it/",
     },
   ]);
 });
 
 describe("parse english and soundmark", () => {
   it("parse simply ", () => {
-    expect(parseEnglishAndSoundMark("like /laɪk/")).toEqual({
+    expect(parseEnglishAndSoundmark("like /laɪk/")).toEqual({
       english: "like",
-      soundMark: "/laɪk/",
+      soundmark: "/laɪk/",
     });
   });
 
   it("parse multi group", () => {
-    expect(parseEnglishAndSoundMark("like me /laɪk/ /me/")).toEqual({
+    expect(parseEnglishAndSoundmark("like me /laɪk/ /me/")).toEqual({
       english: "like me",
-      soundMark: "/laɪk/ /me/",
+      soundmark: "/laɪk/ /me/",
+    });
+  });
+
+  it("parse multi space", () => {
+    expect(parseEnglishAndSoundmark("like me /laɪk    /me/")).toEqual({
+      english: "like me",
+      soundmark: "/laɪk /me/",
     });
   });
 });

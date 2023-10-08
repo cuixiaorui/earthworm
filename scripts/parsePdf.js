@@ -1,17 +1,18 @@
 const fs = require("fs");
+const path = require("path");
 const pdf = require("pdf-parse");
 
 const currentCourseFileName = "02";
 
 function main() {
-  let dataBuffer = fs.readFileSync(`./pdf/${currentCourseFileName}.pdf`);
+  let dataBuffer = fs.readFileSync(path.join(__dirname, `pdf/${currentCourseFileName}.pdf`));
 
   pdf(dataBuffer).then(function (data) {
     const result = parse(data.text);
 
     fs.writeFileSync(
-      `./courses/${currentCourseFileName}.json`,
-      JSON.stringify(result)
+      path.join(__dirname, `courses/${currentCourseFileName}.json`),
+      JSON.stringify(result),
     );
   });
 }
@@ -19,7 +20,8 @@ function main() {
 main();
 
 const STARTSIGN = "中文 英文 K.K.音标";
-function parse(text) {
+
+export function parse(text) {
   // 0. 先基于 \n 来切分成数组
   const rawTextList = text.split("\n").map((t) => {
     return t.trim();
@@ -90,9 +92,9 @@ function isChinese(str) {
   return reg.test(str);
 }
 
-function parseEnglishAndSoundmark(text) {
+export function parseEnglishAndSoundmark(text) {
   console.log(text);
-  const list = text.split(" ");
+  const list = text.split(/\s+/);
   const soundmarkdStartIndex = list.findIndex((t) => t.startsWith("/"));
 
   const english = list.slice(0, soundmarkdStartIndex).join(" ");
