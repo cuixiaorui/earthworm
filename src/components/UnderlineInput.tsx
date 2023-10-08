@@ -13,6 +13,7 @@ export default function UnderlineInput({
   const [inputValue, setInputValue] = useState("");
   const [words, setWords] = useState<string[]>([]);
   const [focusing, setFocusing] = useState(true);
+  const [isCorrect, setIsCorrect] = useState<Boolean>(true);
 
   useEffect(() => {
     const newWords = inputValue.trimStart().split(" ");
@@ -28,13 +29,16 @@ export default function UnderlineInput({
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      const isCorrect = onCheckAnswer(inputValue.trim());
-      if (!isCorrect) {
-        Array.from(codeItemList).map((item: any) => {
-          item.className = "code-item active--error";
-        });
+      const _isCorrect = onCheckAnswer(inputValue.trim());
+
+      if (_isCorrect) {
+        setInputValue("");
+        return;
       }
+
+      setIsCorrect(_isCorrect);
       setTimeout(() => {
+        setIsCorrect(true);
         setInputValue("");
       }, 450);
     }
@@ -54,6 +58,7 @@ export default function UnderlineInput({
       className={[
         "code-item",
         i === activeInputIndex && focusing ? "active" : "",
+        !isCorrect && "active--error",
       ]
         .filter(Boolean)
         .join(" ")}
