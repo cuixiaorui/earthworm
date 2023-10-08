@@ -27,13 +27,15 @@ export default function Home() {
   const handleCheckAnswer = (userInput: string) => {
     if (checkCorrect(userInput)) {
       setCurrentMode("answer");
-      resetFailedCount()
+      resetFailedCount();
     } else {
       increaseFailedCount(() => {
         setCurrentMode("answer");
       });
     }
   };
+
+  const lineNum = getCurrentStatement()?.english.split(' ').length || 1
 
   return (
     <div className="container mx-auto flex h-full flex-1 flex-col items-center justify-center pb-10 h-96">
@@ -45,6 +47,7 @@ export default function Home() {
                 {currentMode === "question" ? (
                   <Question
                     word={getCurrentStatement()?.chinese || "加载中..."}
+                    lineNum = {lineNum}
                     onCheckAnswer={handleCheckAnswer}
                   ></Question>
                 ) : (

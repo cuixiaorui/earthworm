@@ -1,15 +1,18 @@
 const fs = require("fs");
 const pdf = require("pdf-parse");
 
+const currentCourseFileName = "02";
+
 function main() {
-  let dataBuffer = fs.readFileSync("./01.pdf");
+  let dataBuffer = fs.readFileSync(`./pdf/${currentCourseFileName}.pdf`);
 
   pdf(dataBuffer).then(function (data) {
-    //     fs.writeFileSync("./01-raw.json", JSON.stringify(data.text));
     const result = parse(data.text);
-    //     console.log(result);
 
-    fs.writeFileSync("./01.json", JSON.stringify(result));
+    fs.writeFileSync(
+      `./courses/${currentCourseFileName}.json`,
+      JSON.stringify(result)
+    );
   });
 }
 

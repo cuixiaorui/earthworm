@@ -7,13 +7,16 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@prisma/client": "5.4.1",
     "@types/node": "20.6.3",
     "@types/react": "18.2.22",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.16",
+    "axios": "^1.5.1",
     "eslint": "8.49.0",
     "eslint-config-next": "13.5.2",
     "next": "13.5.2",
@@ -27,6 +30,7 @@
   },
   "devDependencies": {
     "pdf-parse": "^1.1.1",
+    "prisma": "^5.4.1",
     "vitest": "^0.34.6"
   }
 }

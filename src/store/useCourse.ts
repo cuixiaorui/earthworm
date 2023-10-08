@@ -24,7 +24,10 @@ export const useCourse = create<State>((set, get) => ({
   statementIndex: 0,
   currentCourse: undefined,
   async fetchCourse() {
-    const response = await fetch("/api/main");
+    // TODO 先写死第一课的 courseID
+    // 后续需要基于 courses 来获取
+    const firstCourseId = "clng5l3300000fydlimlj4m4h";
+    const response = await fetch(`/course/${firstCourseId}/api`);
     const data = await response.json();
     set({ currentCourse: data.data });
   },
