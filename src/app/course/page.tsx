@@ -5,9 +5,13 @@ interface Course {
   id: string;
 }
 
-
 async function fetchCourses(): Promise<Course[]> {
-  const response = await fetch(`http://localhost:3000/course/api`);
+  const courseApiPath =
+    process.env.NODE_ENV === "production"
+      ? "https://earthworm-six.vercel.app/course/api"
+      : "http://localhost:3000/course/api";
+
+  const response = await fetch(courseApiPath);
 
   if (!response.ok) {
     // This will activate the closest `error.js` Error Boundary
