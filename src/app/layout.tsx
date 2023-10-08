@@ -1,10 +1,10 @@
-import "./globals.css";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-
-const inter = Inter({ subsets: ["latin"] });
+import './globals.css'
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import { ThemeProvider } from '@/components/ThemeProvider'
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: "earthworm",
@@ -20,7 +20,10 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-          <div className="flex flex-col">
+
+        <ThemeProvider
+           attribute="class">
+           <div className="flex flex-col">
             <div className="mb-20">
               <Header />
             </div>
@@ -31,6 +34,7 @@ export default async function RootLayout({
               <Footer />
             </div>
           </div>
+        </ThemeProvider>
       </body>
     </html>
   );

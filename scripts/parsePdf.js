@@ -75,7 +75,7 @@ function parse(text) {
     }
 
     run();
-    console.log(data);
+    // console.log(data);
     i++;
     run();
 
@@ -91,12 +91,21 @@ function isChinese(str) {
 }
 
 function parseEnglishAndSoundmark(text) {
-  console.log(text);
+  // console.log(text);
   const list = text.split(" ");
   const soundmarkdStartIndex = list.findIndex((t) => t.startsWith("/"));
 
   const english = list.slice(0, soundmarkdStartIndex).join(" ");
-  const soundmark = list.slice(soundmarkdStartIndex).join(" ");
+  // 去掉音标中多余空格仅保留1个
+  // /ʃi/    /ɪz/
+  // /ju /laɪk/ /tə/ /tɔk/ /wɪð/ /mi/ /'ɛvri/ /de/
+  let rawSoundmark = list.slice(soundmarkdStartIndex).join(" ");
+  let soundmark = rawSoundmark.split("/")
+                              .map(t => { return t.trim().replace(/\s+/g, " ") })
+                              .filter(t => { return (t !== '')  })
+                              .toString()
+  soundmark = '/' + soundmark.replace(/,/g, "/ /") + '/';
+  console.log(soundmark);
 
   return {
     english,

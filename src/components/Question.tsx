@@ -24,7 +24,7 @@ export default function Question({
 
   return (
     <div className="text-5xl text-center mb-20 mt-10">
-      <div className="text-fuchsia-500">{word}</div>
+      <div className="text-fuchsia-500 dark:text-gray-50">{word}</div>
       {
         <UnderlineInput
           onCheckAnswer={onCheckAnswer}
