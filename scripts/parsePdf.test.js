@@ -101,9 +101,9 @@ describe("parse english and soundmark", () => {
   });
 
   it("parse multi space", () => {
-    expect(parseEnglishAndSoundmark("like me /laɪk    /me/")).toEqual({
+    expect(parseEnglishAndSoundmark("like me /laɪk/    /me/")).toEqual({
       english: "like me",
-      soundmark: "/laɪk /me/",
+      soundmark: "/laɪk/ /me/",
     });
   });
 });
