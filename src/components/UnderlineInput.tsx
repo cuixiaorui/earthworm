@@ -1,60 +1,54 @@
 import "./UnderlineInput.css";
 import { ChangeEvent, useState, useEffect } from "react";
 
-export default function Question({
+export default function UnderlineInput({
   lineNum,
   onCheckAnswer,
 }: {
   lineNum: number;
   onCheckAnswer: (userInput: string) => void;
 }) {
+  const [activeInputIndex, setActiveInputIndex] = useState(0);
   const [inputValue, setInputValue] = useState("");
-  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
-  };
+  const [words, setWords] = useState<string[]>([]);
+  const [focusing, setFocusing] = useState(true);
 
   useEffect(() => {
-    codeItemList = document.querySelectorAll(".code-item");
-    showNum();
-    cutAct("focus");
-  }, [inputValue]);
+    const newWords = inputValue.trimStart().split(' ');
+    setActiveInputIndex(
+      Math.min(newWords.length - 1, lineNum - 1),
+    );
+    setWords(newWords);
+  }, [inputValue, lineNum]);
+
+  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
+    // make sure inputEventValue ends with most one blank;
+    const inputEventValue = event.target.value.replace(/\s+$/, ' ');
+    setInputValue(inputEventValue);
+  };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       onCheckAnswer(inputValue.trim());
       setInputValue("");
-      cutAct("blur");
     }
   };
 
-  const showNum = () => {
-    const inputValList = inputValue.split(" ");
-    Array.from(codeItemList).map((item: any, index) => {
-      inputValList[index]
-        ? (item.innerText = inputValList[index])
-        : (item.innerText = "");
-    });
-  };
-
-  const cutAct = (type: string) => {
-    const inputValList = inputValue.split(" ");
-    const valLenth = inputValList.length;
-    Array.from(codeItemList).map((item: any) => {
-      item.className = "code-item";
-    });
-    if (type === "focus") {
-      codeItemList[valLenth - 1].className = "code-item active";
-    }
-  };
-
-  let codeItemList: any;
   const handleInputFocus = () => {
-    codeItemList = document.querySelectorAll(".code-item");
-    cutAct("focus");
+    setFocusing(true);
   };
+
+  const handleBlur = () => {
+    setFocusing(false);
+  }
 
   const lineInputEls = Array.from({ length: lineNum }, (_, i) => (
-    <div key={i} className="code-item"></div>
+    <div key={i} className={[
+      "code-item",
+      (i === activeInputIndex) && focusing ? "active" : ""
+    ].filter(Boolean).join(' ')}>{
+      words[i]
+    }</div>
   ));
 
   return (
@@ -67,6 +61,7 @@ export default function Question({
         onInput={handleInput}
         onKeyDown={handleKeyDown}
         onFocus={handleInputFocus}
+        onBlur={handleBlur}
         autoFocus
       />
     </div>
