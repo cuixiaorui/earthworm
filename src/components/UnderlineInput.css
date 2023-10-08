@@ -12,9 +12,9 @@
   min-height: 6vh;
   text-align: center;
   font-size: 4vw;
-  color: rgba(32,32,32,0.6);
+  color: rgba(32, 32, 32, 0.6);
   border: none;
-  border-bottom: 2px solid rgb(32, 32, 32,0.4);
+  border-bottom: 2px solid rgb(32, 32, 32, 0.4);
   transition: border 0.3s;
   box-sizing: border-box;
   margin-right: 8px;
@@ -32,4 +32,34 @@
 
 .active {
   border-bottom: 3px solid #1E80FF !important;
+}
+
+.active--error {
+  border-bottom: 3px solid #ff1e4b !important;
+  animation: shakespan .45s ease 0s infinite;
+  transform-origin: bottom center;
+}
+
+@keyframes shakespan {
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(10deg);
+  }
+
+  50% {
+    transform: rotate(-10deg);
+  }
+
+  75% {
+    transform: rotate(5deg);
+  }
+
+  85% {
+    transform: rotate(-5deg);
+  }
 }

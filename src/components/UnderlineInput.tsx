@@ -1,3 +1,4 @@
+import { Love_Light } from "next/font/google";
 import "./UnderlineInput.css";
 import { ChangeEvent, useState, useEffect } from "react";
 
@@ -6,7 +7,7 @@ export default function Question({
   onCheckAnswer,
 }: {
   lineNum: number;
-  onCheckAnswer: (userInput: string) => void;
+  onCheckAnswer: (userInput: string) => Boolean;
 }) {
   const [inputValue, setInputValue] = useState("");
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
@@ -21,9 +22,16 @@ export default function Question({
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      onCheckAnswer(inputValue.trim());
-      setInputValue("");
-      cutAct("blur");
+      const isCorrect = onCheckAnswer(inputValue.trim());
+      if (!isCorrect) {
+        Array.from(codeItemList).map((item: any) => {
+          item.className = "code-item active--error";
+        });
+      }
+      setTimeout(() => {
+        setInputValue("");
+        cutAct("blur");
+      }, 450);
     }
   };
 
@@ -38,12 +46,13 @@ export default function Question({
 
   const cutAct = (type: string) => {
     const inputValList = inputValue.split(" ");
-    const valLenth = inputValList.length;
+    const valLength = inputValList.length;
+
     Array.from(codeItemList).map((item: any) => {
       item.className = "code-item";
     });
     if (type === "focus") {
-      codeItemList[valLenth - 1].className = "code-item active";
+      codeItemList[valLength - 1].className = "code-item active";
     }
   };
 
