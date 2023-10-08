@@ -1,22 +1,34 @@
 const fs = require("fs");
 const pdf = require("pdf-parse");
 
-const currentCourseFileName = "02";
+(async () => {
+  // 读取 pdf 中的所有文件
+  const courseFiles = fs
+    .readdirSync("./pdf")
+    .filter((fileName) => {
+      return !fileName.startsWith(".");
+    })
+    .map((fileName) => {
+      return fileName.replace(".pdf", "");
+    });
 
-function main() {
-  let dataBuffer = fs.readFileSync(`./pdf/${currentCourseFileName}.pdf`);
+  for (const courseFile of courseFiles) {
+    await main(courseFile);
+  }
+})();
+
+function main(courseFileName) {
+  let dataBuffer = fs.readFileSync(`./pdf/${courseFileName}.pdf`);
 
   pdf(dataBuffer).then(function (data) {
     const result = parse(data.text);
 
     fs.writeFileSync(
-      `./courses/${currentCourseFileName}.json`,
+      `./courses/${courseFileName}.json`,
       JSON.stringify(result)
     );
   });
 }
-
-main();
 
 const STARTSIGN = "中文 英文 K.K.音标";
 function parse(text) {
@@ -75,7 +87,6 @@ function parse(text) {
     }
 
     run();
-    // console.log(data);
     i++;
     run();
 
@@ -91,21 +102,25 @@ function isChinese(str) {
 }
 
 function parseEnglishAndSoundmark(text) {
-  // console.log(text);
+  console.log(text);
   const list = text.split(" ");
   const soundmarkdStartIndex = list.findIndex((t) => t.startsWith("/"));
 
   const english = list.slice(0, soundmarkdStartIndex).join(" ");
-  // 去掉音标中多余空格仅保留1个
-  // /ʃi/    /ɪz/
-  // /ju /laɪk/ /tə/ /tɔk/ /wɪð/ /mi/ /'ɛvri/ /de/
-  let rawSoundmark = list.slice(soundmarkdStartIndex).join(" ");
-  let soundmark = rawSoundmark.split("/")
-                              .map(t => { return t.trim().replace(/\s+/g, " ") })
-                              .filter(t => { return (t !== '')  })
-                              .toString()
-  soundmark = '/' + soundmark.replace(/,/g, "/ /") + '/';
-  console.log(soundmark);
+
+  let rawSoundmark = list
+    .slice(soundmarkdStartIndex)
+    .join(" ")
+    .split("/")
+    .map((t) => {
+      return t.trim().replace(/\s+/g, " ");
+    })
+    .filter((t) => {
+      return t !== "";
+    })
+    .toString();
+
+  const soundmark = `/${rawSoundmark.replace(/,/g, "/ /") + "/"}`;
 
   return {
     english,
