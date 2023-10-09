@@ -45,7 +45,9 @@ export default function UnderlineInput({
   const lineInputEls = Array.from({ length: lineNum }, (_, i) => (
     <div key={i} className={[
       "code-item",
-      (i === activeInputIndex) && focusing ? "active" : ""
+      
+      (i === activeInputIndex) && focusing ? "active" : "",
+      "dark:text-indigo-500  text-[rgba(32,32,32,0.6)]"
     ].filter(Boolean).join(' ')}>{
       words[i]
     }</div>
@@ -55,6 +57,7 @@ export default function UnderlineInput({
     <div className="code-box">
       {lineInputEls}
       <input
+      
         className="code-input"
         type="text"
         value={inputValue}

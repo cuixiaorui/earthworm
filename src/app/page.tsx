@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import Question from "@/components/Question";
 import Answer from "@/components/Answer";
-import Statistics from "@/components/Statistics";
+// import Statistics from "@/components/Statistics";
 import { useCourse, useFailedCount } from "@/store";
+import Header from "@/components/Header";
 
 export default function Home() {
   const [currentMode, setCurrentMode] = useState<"question" | "answer">(
@@ -12,11 +13,20 @@ export default function Home() {
   );
 
   const {count, increaseFailedCount, resetFailedCount } = useFailedCount();
-  const { toNextStatement, fetchCourse, getCurrentStatement, checkCorrect } = useCourse(state => state);
+  const {
+    currentCourse,
+    toNextStatement,
+    fetchCourse,
+    getCurrentStatement,
+    checkCorrect,
+  } = useCourse();
   const [isShowAnswerNowBtn, setIsShowAnswerNowBtn] = useState(false)
-
+  
   useEffect(() => {
-    fetchCourse();
+    if (!currentCourse) {
+      const firstCourseId = "clng5l3300000fydlimlj4m4h";
+      fetchCourse(firstCourseId);
+    }
     document.addEventListener('keydown', handleKeyDown);
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
@@ -50,7 +60,7 @@ export default function Home() {
     }
   };
 
-  const lineNum = getCurrentStatement()?.english.split(' ').length || 1
+  const lineNum = getCurrentStatement()?.english.split(" ").length || 1;
 
   return (
     <div className="container mx-auto flex h-full flex-1 flex-col items-center justify-center pb-10 h-96">
@@ -83,7 +93,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <Statistics />
+        {/* <Statistics /> */}
       </div>
     </div>
   );

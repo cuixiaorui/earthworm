@@ -7,7 +7,8 @@ interface Statement {
 }
 
 interface CourseData {
-  id: number;
+  id: string;
+  title: string;
   statements: Statement[];
 }
 
@@ -15,7 +16,7 @@ interface State {
   statementIndex: number;
   currentCourse?: CourseData;
   toNextStatement: () => void;
-  fetchCourse: () => void;
+  fetchCourse: (courseId: CourseData["id"]) => void;
   getCurrentStatement: () => Statement | undefined;
   checkCorrect: (input: string) => boolean;
 }
@@ -23,11 +24,8 @@ interface State {
 export const useCourse = create<State>((set, get) => ({
   statementIndex: 0,
   currentCourse: undefined,
-  async fetchCourse() {
-    // TODO 先写死第一课的 courseID
-    // 后续需要基于 courses 来获取
-    const firstCourseId = "clng5l3300000fydlimlj4m4h";
-    const response = await fetch(`/course/${firstCourseId}/api`);
+  async fetchCourse(courseId: CourseData["id"]) {
+    const response = await fetch(`/course/${courseId}/api`);
     const data = await response.json();
     set({ currentCourse: data.data });
   },
