@@ -1,5 +1,4 @@
 .code-box {
-  height: 10vh;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -10,6 +9,7 @@
 }
 
 .code-box .code-item {
+  margin-top: .5em;
   padding: 0 6px;
   min-width: 35px;
   min-height: 6vh;
