@@ -15,9 +15,6 @@ export const useFailedCount = create<FailedCountState>((set) => ({
 
       if (nextCount >= failedCountTotal) {
         callback();
-        return {
-          count: 0,
-        };
       }
       return {
         count: nextCount,

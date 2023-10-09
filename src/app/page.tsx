@@ -5,16 +5,15 @@ import Question from "@/components/Question";
 import Answer from "@/components/Answer";
 import Statistics from "@/components/Statistics";
 import { useCourse, useFailedCount } from "@/store";
-import { Love_Light } from "next/font/google";
 
 export default function Home() {
   const [currentMode, setCurrentMode] = useState<"question" | "answer">(
     "question"
   );
 
-  const { increaseFailedCount, resetFailedCount } = useFailedCount();
-  const { toNextStatement, fetchCourse, getCurrentStatement, checkCorrect } =
-    useCourse();
+  const {count, increaseFailedCount, resetFailedCount } = useFailedCount();
+  const { toNextStatement, fetchCourse, getCurrentStatement, checkCorrect } = useCourse(state => state);
+  const [isShowAnswerNowBtn, setIsShowAnswerNowBtn] = useState(false)
 
   useEffect(() => {
     fetchCourse();
@@ -22,19 +21,20 @@ export default function Home() {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [count]);
 
-  const handleKeyDown = (event:any) => {
-    if (event.key === 'Tab') {
+  function handleKeyDown(event: any) {
+    if (event.key === 'Tab' && count >= 2) {
       showAnswerNow()
     }
-  };
+  }
 
   const showAnswerNow = () => {
     setCurrentMode("answer");
+    setIsShowAnswerNowBtn(false)
     resetFailedCount();
   }
-  
+
   const handleToNextStatement = () => {
     toNextStatement();
     setCurrentMode("question");
@@ -45,7 +45,7 @@ export default function Home() {
       showAnswerNow()
     } else {
       increaseFailedCount(() => {
-        setCurrentMode("answer");
+        setIsShowAnswerNowBtn(true)
       });
     }
   };
@@ -60,18 +60,17 @@ export default function Home() {
             <div className="container flex flex-grow flex-col items-center justify-center">
               <div className="flex flex-col items-center justify-center pb-1 pt-4">
                 {currentMode === "question" ? (
-
                   <>
                     <Question
                       word={getCurrentStatement()?.chinese || "加载中..."}
                       lineNum={lineNum}
                       onCheckAnswer={handleCheckAnswer}
                     ></Question>
-                    <div className="flex gap-x-2 text-sm">
-                      <button className="rounded-sm px-2 bg-[#636669] text-white dark:text-[#121212]"
-                      onClick={showAnswerNow} >tap</button>
-                      <div className=" text-[#636669]"> - show answer</div>
-                    </div>
+                    {isShowAnswerNowBtn && <div className="flex gap-x-2 text-sm">
+                      <button className="rounded-sm px-2 bg-gray-600 text-white dark:text-gray-900"
+                        onClick={showAnswerNow} >tap</button>
+                      <div className=" text-gray-600"> - show answer</div>
+                    </div>}
                   </>
                 ) : (
                   <Answer
