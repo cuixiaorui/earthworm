@@ -1,14 +1,17 @@
 .code-box {
   height: 10vh;
   display: flex;
-  justify-content: space-around;
-  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+  /* justify-content: space-around; */
+  width: 75vw;
   position: relative;
   margin-top: 8px;
 }
 
 .code-box .code-item {
-  width: 10vw;
+  padding: 0 6px;
+  min-width: 35px;
   min-height: 6vh;
   text-align: center;
   font-size: 4vw;
