@@ -5,6 +5,7 @@ import Question from "@/components/Question";
 import Answer from "@/components/Answer";
 import Statistics from "@/components/Statistics";
 import { useCourse, useFailedCount } from "@/store";
+import { Love_Light } from "next/font/google";
 
 export default function Home() {
   const [currentMode, setCurrentMode] = useState<"question" | "answer">(
@@ -17,8 +18,23 @@ export default function Home() {
 
   useEffect(() => {
     fetchCourse();
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
 
+  const handleKeyDown = (event:any) => {
+    if (event.key === 'Tab') {
+      showAnswerNow()
+    }
+  };
+
+  const showAnswerNow = () => {
+    setCurrentMode("answer");
+    resetFailedCount();
+  }
+  
   const handleToNextStatement = () => {
     toNextStatement();
     setCurrentMode("question");
@@ -26,8 +42,7 @@ export default function Home() {
 
   const handleCheckAnswer = (userInput: string) => {
     if (checkCorrect(userInput)) {
-      setCurrentMode("answer");
-      resetFailedCount();
+      showAnswerNow()
     } else {
       increaseFailedCount(() => {
         setCurrentMode("answer");
@@ -45,11 +60,19 @@ export default function Home() {
             <div className="container flex flex-grow flex-col items-center justify-center">
               <div className="flex flex-col items-center justify-center pb-1 pt-4">
                 {currentMode === "question" ? (
-                  <Question
-                    word={getCurrentStatement()?.chinese || "加载中..."}
-                    lineNum = {lineNum}
-                    onCheckAnswer={handleCheckAnswer}
-                  ></Question>
+
+                  <>
+                    <Question
+                      word={getCurrentStatement()?.chinese || "加载中..."}
+                      lineNum={lineNum}
+                      onCheckAnswer={handleCheckAnswer}
+                    ></Question>
+                    <div className="flex gap-x-2 text-sm">
+                      <button className="rounded-sm px-2 bg-[#636669] text-white dark:text-[#121212]"
+                      onClick={showAnswerNow} >tap</button>
+                      <div className=" text-[#636669]"> - show answer</div>
+                    </div>
+                  </>
                 ) : (
                   <Answer
                     word={getCurrentStatement()?.english || ""}
