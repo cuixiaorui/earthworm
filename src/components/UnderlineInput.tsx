@@ -57,6 +57,7 @@ export default function UnderlineInput({
       key={i}
       className={[
         "code-item",
+      "dark:text-indigo-500  text-[rgba(32,32,32,0.6)]",
         i === activeInputIndex && focusing ? "active" : "",
         !isCorrect && "active--error",
       ]
@@ -71,6 +72,7 @@ export default function UnderlineInput({
     <div className="code-box">
       {lineInputEls}
       <input
+      
         className="code-input"
         type="text"
         value={inputValue}
