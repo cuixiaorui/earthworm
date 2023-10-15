@@ -12,7 +12,7 @@ export default function Home() {
     "question"
   );
 
-  const { increaseFailedCount, resetFailedCount } = useFailedCount();
+  const {count, increaseFailedCount, resetFailedCount } = useFailedCount();
   const {
     currentCourse,
     toNextStatement,
@@ -20,13 +20,30 @@ export default function Home() {
     getCurrentStatement,
     checkCorrect,
   } = useCourse();
-
+  const [isShowAnswerNowBtn, setIsShowAnswerNowBtn] = useState(false)
+  
   useEffect(() => {
     if (!currentCourse) {
       const firstCourseId = "clng5l3300000fydlimlj4m4h";
       fetchCourse(firstCourseId);
     }
-  }, []);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [count]);
+
+  function handleKeyDown(event: any) {
+    if (event.key === 'Tab' && count >= 2) {
+      showAnswerNow()
+    }
+  }
+
+  const showAnswerNow = () => {
+    setCurrentMode("answer");
+    setIsShowAnswerNowBtn(false)
+    resetFailedCount();
+  }
 
   const handleToNextStatement = () => {
     toNextStatement();
@@ -35,11 +52,10 @@ export default function Home() {
 
   const handleCheckAnswer = (userInput: string) => {
     if (checkCorrect(userInput)) {
-      setCurrentMode("answer");
-      resetFailedCount();
+      showAnswerNow()
     } else {
       increaseFailedCount(() => {
-        setCurrentMode("answer");
+        setIsShowAnswerNowBtn(true)
       });
     }
   };
@@ -47,34 +63,38 @@ export default function Home() {
   const lineNum = getCurrentStatement()?.english.split(" ").length || 1;
 
   return (
-    <>
-      <Header />
-      <div className="container mx-auto flex h-full flex-1 flex-col items-center justify-center pb-10 h-96 mt-40">
-        <div className="container relative mx-auto flex h-full flex-col items-center">
-          <div className="container flex flex-grow items-center justify-center">
-            <div className="container flex h-full w-full flex-col items-center justify-center">
-              <div className="container flex flex-grow flex-col items-center justify-center">
-                <div className="flex flex-col items-center justify-center pb-1 pt-4">
-                  {currentMode === "question" ? (
+    <div className="container mx-auto flex h-full flex-1 flex-col items-center justify-center pb-10 h-96">
+      <div className="container relative mx-auto flex h-full flex-col items-center">
+        <div className="container flex flex-grow items-center justify-center">
+          <div className="container flex h-full w-full flex-col items-center justify-center">
+            <div className="container flex flex-grow flex-col items-center justify-center">
+              <div className="flex flex-col items-center justify-center pb-1 pt-4">
+                {currentMode === "question" ? (
+                  <>
                     <Question
                       word={getCurrentStatement()?.chinese || "加载中..."}
                       lineNum={lineNum}
                       onCheckAnswer={handleCheckAnswer}
                     ></Question>
-                  ) : (
-                    <Answer
-                      word={getCurrentStatement()?.english || ""}
-                      soundmark={getCurrentStatement()?.soundmark || ""}
-                      onToNextStatement={handleToNextStatement}
-                    ></Answer>
-                  )}
-                </div>
+                    {isShowAnswerNowBtn && <div className="flex gap-x-2 text-sm">
+                      <button className="rounded-sm px-2 bg-gray-600 text-white dark:text-gray-900"
+                        onClick={showAnswerNow} >tap</button>
+                      <div className=" text-gray-600"> - show answer</div>
+                    </div>}
+                  </>
+                ) : (
+                  <Answer
+                    word={getCurrentStatement()?.english || ""}
+                    soundmark={getCurrentStatement()?.soundmark || ""}
+                    onToNextStatement={handleToNextStatement}
+                  ></Answer>
+                )}
               </div>
             </div>
           </div>
-          {/* <Statistics /> */}
         </div>
+        {/* <Statistics /> */}
       </div>
-    </>
+    </div>
   );
 }
