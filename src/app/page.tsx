@@ -12,7 +12,7 @@ export default function Home() {
     "question"
   );
 
-  const { increaseFailedCount, resetFailedCount } = useFailedCount();
+  const { count, increaseFailedCount, resetFailedCount } = useFailedCount();
   const {
     currentCourse,
     toNextStatement,
@@ -20,6 +20,7 @@ export default function Home() {
     getCurrentStatement,
     checkCorrect,
   } = useCourse();
+  const [isShowAnswerNowBtn, setIsShowAnswerNowBtn] = useState(false);
 
   useEffect(() => {
     if (!currentCourse) {
@@ -28,6 +29,24 @@ export default function Home() {
     }
   }, []);
 
+  useEffect(() => {
+    function handleKeyDown(event: any) {
+      if (event.key === "Tab" && count >= 2) {
+        showAnswerNow();
+      }
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [count]);
+
+  const showAnswerNow = () => {
+    setCurrentMode("answer");
+    setIsShowAnswerNowBtn(false);
+    resetFailedCount();
+  };
+
   const handleToNextStatement = () => {
     toNextStatement();
     setCurrentMode("question");
@@ -35,11 +54,10 @@ export default function Home() {
 
   const handleCheckAnswer = (userInput: string) => {
     if (checkCorrect(userInput)) {
-      setCurrentMode("answer");
-      resetFailedCount();
+      showAnswerNow();
     } else {
       increaseFailedCount(() => {
-        setCurrentMode("answer");
+        setIsShowAnswerNowBtn(true);
       });
     }
   };
@@ -49,18 +67,31 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="container mx-auto flex h-full flex-1 flex-col items-center justify-center pb-10 h-96 mt-40">
+      <div className="container mx-auto flex h-full flex-1 flex-col items-center justify-center pb-10 h-96">
         <div className="container relative mx-auto flex h-full flex-col items-center">
           <div className="container flex flex-grow items-center justify-center">
             <div className="container flex h-full w-full flex-col items-center justify-center">
               <div className="container flex flex-grow flex-col items-center justify-center">
                 <div className="flex flex-col items-center justify-center pb-1 pt-4">
                   {currentMode === "question" ? (
-                    <Question
-                      word={getCurrentStatement()?.chinese || "加载中..."}
-                      lineNum={lineNum}
-                      onCheckAnswer={handleCheckAnswer}
-                    ></Question>
+                    <>
+                      <Question
+                        word={getCurrentStatement()?.chinese || "加载中..."}
+                        lineNum={lineNum}
+                        onCheckAnswer={handleCheckAnswer}
+                      ></Question>
+                      {isShowAnswerNowBtn && (
+                        <div className="flex gap-x-2 text-sm">
+                          <button
+                            className="rounded-sm px-2 bg-gray-600 text-white dark:text-gray-900"
+                            onClick={showAnswerNow}
+                          >
+                            tap
+                          </button>
+                          <div className=" text-gray-600"> - show answer</div>
+                        </div>
+                      )}
+                    </>
                   ) : (
                     <Answer
                       word={getCurrentStatement()?.english || ""}
