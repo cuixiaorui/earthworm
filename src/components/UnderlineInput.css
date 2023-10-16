@@ -13,9 +13,6 @@
   min-height: 6vh;
   text-align: center;
   font-size: 4vw;
-  /* color:  */
-  border: none;
-  border-bottom: 2px solid rgb(32, 32, 32,0.4);
   transition: border 0.3s;
   box-sizing: border-box;
   margin-right: 8px;
