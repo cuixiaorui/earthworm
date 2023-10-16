@@ -67,7 +67,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="container mx-auto flex h-full flex-1 flex-col items-center justify-center pb-10 h-96">
+      <div className="container mx-auto flex h-full flex-1 flex-col items-center justify-center pb-10 h-96 mt-40">
         <div className="container relative mx-auto flex h-full flex-col items-center">
           <div className="container flex flex-grow items-center justify-center">
             <div className="container flex h-full w-full flex-col items-center justify-center">
