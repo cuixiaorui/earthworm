@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="mb-1 mt-4 flex w-full items-center justify-center gap-2.5 text-sm ease-in ml-48">
+    <footer className="fixed bottom-10 mb-1 mt-4 flex w-full items-center justify-center gap-2.5 text-sm ease-in">
       <a
         href="https://github.com/cuixiaorui/earthworm"
         target="_blank"
