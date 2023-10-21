@@ -45,7 +45,9 @@ export default function UnderlineInput({
   const lineInputEls = Array.from({ length: lineNum }, (_, i) => (
     <div key={i} className={[
       "code-item",
-      
+      "border-b-2",
+      "border-b-solid",
+      "border-b-gray-300 dark:border-b-gray-500",
       (i === activeInputIndex) && focusing ? "active" : "",
       "dark:text-indigo-500  text-[rgba(32,32,32,0.6)]"
     ].filter(Boolean).join(' ')}>{

@@ -23,9 +23,7 @@ export default async function RootLayout({
           {" "}
           <div className="flex flex-col">
             <div className="mb-18">{children} </div>
-            <div className="fixed bottom-10 mt-12 pt-20 ml-24 pl-96">
-              <Footer />
-            </div>{" "}
+            <Footer />{" "}
           </div>
         </ThemeProvider>
       </body>

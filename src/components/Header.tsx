@@ -12,7 +12,7 @@ export default function Header() {
       <div className="flex w-full flex-col items-center justify-between space-y-3 lg:flex-row lg:space-y-0">
         <a
           className="flex items-center text-2xl font-bold text-indigo-500 no-underline hover:no-underline lg:text-4xl"
-          href="/main"
+          href="/"
         >
           <h1 className="flex items-center align-middle">
             {/* Image required properties: https://stackoverflow.com/questions/75781160/next-image-component-gives-error-missing-required-width-property-when-runni */}
