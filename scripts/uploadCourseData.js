@@ -7,48 +7,7 @@ const { PrismaClient } = require("@prisma/client");
 
 const env = {
   dev: {
-    courses: [
-      {
-        cId: "clnykti3z0000qxyzoa23574v",
-        fileName: "01",
-      },
-      {
-        cId: "clnyn3n9u0000qx5cq7mkl2hd",
-        fileName: "02",
-      },
-      {
-        cId: "clnyt9t8y0000qxaqp33szoj4",
-        fileName: "03",
-      },
-      {
-        cId: "clnyta2900001qxaqh7z4yxk7",
-        fileName: "04",
-      },
-      {
-        cId: "clnytacni0002qxaqbu95pg3l",
-        fileName: "05",
-      },
-      {
-        cId: "clnzekqf70003qxaqsv9g148z",
-        fileName: "06",
-      },
-      {
-        cId: "clnzekwth0004qxaq66s4nzdn",
-        fileName: "07",
-      },
-      {
-        cId: "clnzekxk90005qxaqmtj5pmz5",
-        fileName: "08",
-      },
-      {
-        cId: "clnzeky1x0006qxaq3jk7w7it",
-        fileName: "09",
-      },
-      {
-        cId: "clnzekyu30007qxaqo10fb5rt",
-        fileName: "10",
-      },
-    ],
+    courses: JSON.parse(fs.readFileSync("./courses.json")),
     datasourceUrl: "postgresql://postgres:postgres@localhost:5432/postgres",
   },
   prod: {
@@ -116,6 +75,8 @@ const env = {
     datasourceUrl,
   });
 
+  await prisma.statement.deleteMany();
+
   let orderIndex = 1;
   for (const { cId, fileName } of courses) {
     const currentCourseDataPath = `./courses/${fileName}.json`;
@@ -124,7 +85,7 @@ const env = {
 
     const promiseAll = courseData.map((statement, index) => {
       const { chinese, english, soundmark } = statement;
-      const result = uploadStatement(
+      const result = createStatement(
         orderIndex,
         chinese,
         english,
@@ -140,35 +101,15 @@ const env = {
     console.log(`courseName: ${fileName} 全部上传成功`);
   }
 
-  async function uploadStatement(order, chinese, english, soundmark, courseId) {
-    let statement = await prisma.statement.findUnique({
-      where: {
-        order: order,
+  async function createStatement(order, chinese, english, soundmark, courseId) {
+    await prisma.statement.create({
+      data: {
+        order,
+        chinese,
+        english,
+        soundmark,
+        courseId,
       },
     });
-
-    if (statement) {
-      statement = await prisma.statement.update({
-        where: {
-          id: statement.id,
-        },
-        data: {
-          chinese,
-          english,
-          soundmark,
-          courseId,
-        },
-      });
-    } else {
-      statement = await prisma.statement.create({
-        data: {
-          order,
-          chinese,
-          english,
-          soundmark,
-          courseId,
-        },
-      });
-    }
   }
 })();

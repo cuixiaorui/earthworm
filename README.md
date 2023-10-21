@@ -2,8 +2,30 @@
 
 Learning English through the method of constructing sentences with conjunctions
 
-[![earthworm](https://z1.ax1x.com/2023/09/24/pPTjZuT.png)](https://imgse.com/i/pPTjZuT)
+
+## Start
+
+Start the project based on the following steps
+
+Note that this project depends on docker, so make sure that docker is installed first.
+
+
+1. start application
+	```shell
+	pnpm dev
+	```
+2. start database
+	```shell
+	pnpm db:start 
+	```
+3. init data of database
+	```shell
+	pnpm db:init
+	```
 
 ## Technology stack
 
 - nextjs
+- prisma
+- postgres
+
