@@ -18,14 +18,16 @@ Note that this project depends on docker, so make sure that docker is installed 
 	```shell
 	pnpm db:start 
 	```
-3. init data of database
+3. init data of database (It only needs to be executed the first time the database is created)
 	```shell
 	pnpm db:init
 	```
+   
 
 ## Technology stack
 
 - nextjs
 - prisma
 - postgres
+- zustand
 
