@@ -23,9 +23,14 @@ export default function Home() {
   const [isShowAnswerNowBtn, setIsShowAnswerNowBtn] = useState(false);
 
   useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("/course/api");
+      const { data: courses } = await response.json();
+      fetchCourse(courses[0].id);
+    };
+
     if (!currentCourse) {
-      const firstCourseId = "clng5l3300000fydlimlj4m4h";
-      fetchCourse(firstCourseId);
+      fetchData();
     }
   }, []);
 

@@ -29,6 +29,8 @@ export const useCourse = create<State>((set, get) => ({
     const data = await response.json();
     set({ currentCourse: data.data });
   },
+
+
   toNextStatement() {
     set((state) => {
       return {

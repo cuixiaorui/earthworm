@@ -13,7 +13,7 @@ datasource db {
 
 model Statement {
   id        String  @id @default(cuid())
-  order     Int
+  order     Int @unique
   chinese   String
   english   String
   soundmark String

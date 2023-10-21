@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest run",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "studio:dev": "dotenv -e .env.local -- npx prisma studio",
+    "studio:prod": "npx prisma studio"
   },
   "dependencies": {
     "@prisma/client": "^5.4.1",
@@ -29,6 +31,7 @@
     "zustand": "^4.4.2"
   },
   "devDependencies": {
+    "dotenv-cli": "^7.3.0",
     "pdf-parse": "^1.1.1",
     "prisma": "^5.4.1",
     "vitest": "^0.34.6"
