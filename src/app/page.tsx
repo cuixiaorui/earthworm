@@ -10,7 +10,7 @@ import { fetchCourses } from "@/api/course";
 
 export default function Home() {
   const [currentMode, setCurrentMode] = useState<"question" | "answer">(
-    "question"
+    "question",
   );
   const { count, increaseFailedCount, resetFailedCount } = useFailedCount();
   const {

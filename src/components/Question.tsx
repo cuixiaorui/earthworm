@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from "react";
-import UnderlineInput from './UnderlineInput'
+import UnderlineInput from "./UnderlineInput";
 
 export default function Question({
   word,
@@ -25,7 +25,12 @@ export default function Question({
   return (
     <div className="text-5xl text-center mb-20 mt-10">
       <div className="text-fuchsia-500 dark:text-gray-50">{word}</div>
-      {<UnderlineInput onCheckAnswer={onCheckAnswer} lineNum={lineNum}></UnderlineInput>}
+      {
+        <UnderlineInput
+          onCheckAnswer={onCheckAnswer}
+          lineNum={lineNum}
+        ></UnderlineInput>
+      }
     </div>
   );
 }
