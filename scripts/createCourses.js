@@ -51,7 +51,7 @@ const courses = [
 
 (async function () {
   const prisma = new PrismaClient({
-    datasourceUrl: "postgresql://postgres:postgres@localhost:5432/postgres",
+    datasourceUrl: "mysql://root:password@127.0.0.1:3306/earthworm_dev",
   });
 
   // 先删除所有的 courses

@@ -8,12 +8,12 @@ const { PrismaClient } = require("@prisma/client");
 const env = {
   dev: {
     courses: JSON.parse(fs.readFileSync("./courses.json")),
-    datasourceUrl: "postgresql://postgres:postgres@localhost:5432/postgres",
+    datasourceUrl: "mysql://root:password@127.0.0.1:3306/earthworm_dev",
   },
   prod: {
     courses: JSON.parse(fs.readFileSync("./courses.json")),
     datasourceUrl:
-      "postgres://default:HF5qtvR7Ynbf@ep-delicate-frog-57631118-pooler.us-east-1.postgres.vercel-storage.com/verceldb",
+      "mysql://root:earthworm_PROD@bj-cynosdbmysql-grp-841nzva0.sql.tencentcdb.com:20064/earthworm",
   },
 };
 
@@ -34,7 +34,6 @@ const env = {
     datasourceUrl,
   });
 
- 
 
   await prisma.statement.deleteMany();
 

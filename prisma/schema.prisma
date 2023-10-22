@@ -1,24 +1,11 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
 generator client {
   provider = "prisma-client-js"
   output   = "../node_modules/.prisma/client"
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("POSTGRES_PRISMA_URL")
-  directUrl = env("POSTGRES_URL_NON_POOLING")
-}
-
-model Statement {
-  id        String  @id @default(cuid())
-  order     Int 
-  chinese   String
-  english   String
-  soundmark String
-  Course    Course? @relation(fields: [courseId], references: [id])
-  courseId  String?
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 model Course {
@@ -26,5 +13,18 @@ model Course {
   title      String
   statements Statement[]
 
-  @@map(name: "courses")
+  @@map("courses")
+}
+
+model Statement {
+  id        Int     @id @default(autoincrement())
+  order     Int     @unique
+  chinese   String
+  english   String
+  soundmark String
+  courseId  String?
+  courses   Course? @relation(fields: [courseId], references: [id])
+
+  @@index([courseId], map: "Statement_courseId_fkey")
+  @@map("statements")
 }
