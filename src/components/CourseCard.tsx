@@ -1,8 +1,9 @@
 "use client";
 
 import { useCourse } from "@/store/useCourse";
-import { Course } from "@prisma/client";
 import { useRouter } from "next/navigation";
+
+import { type Course } from "@/api/course";
 
 export function CourseCard({ course }: { course: Course }) {
   const router = useRouter();

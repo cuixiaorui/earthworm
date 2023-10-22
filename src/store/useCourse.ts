@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import { fetchCourseById } from "@/api/course";
-import { Course } from "@prisma/client";
 
 interface Statement {
   chinese: string;
@@ -17,7 +16,7 @@ interface CourseData {
 interface State {
   statementIndex: number;
   currentCourse?: CourseData;
-  currentCourseId?: Course["id"];
+  currentCourseId?: CourseData["id"];
   toNextStatement: () => void;
   fetchCourse: (courseId: CourseData["id"]) => void;
   getCurrentStatement: () => Statement | undefined;

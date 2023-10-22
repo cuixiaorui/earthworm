@@ -1,6 +1,6 @@
 import { toUrl } from "./index";
 
-interface Course {
+export interface Course {
   title: string;
   id: string;
 }
