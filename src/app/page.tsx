@@ -7,13 +7,11 @@ import Answer from "@/components/Answer";
 import { useCourse, useFailedCount } from "@/store";
 import Header from "@/components/Header";
 import { fetchCourses } from "@/api/course";
-import { useLocalStorage } from "@uidotdev/usehooks";
 
 export default function Home() {
   const [currentMode, setCurrentMode] = useState<"question" | "answer">(
     "question"
   );
-
   const { count, increaseFailedCount, resetFailedCount } = useFailedCount();
   const {
     currentCourseId,
@@ -24,13 +22,11 @@ export default function Home() {
     checkCorrect,
   } = useCourse();
   const [isShowAnswerNowBtn, setIsShowAnswerNowBtn] = useState(false);
-  const [courseIdValue, saveCourseIdValue] = useLocalStorage("courseId", "");
-  const [statementIndexValue, saveStatementIndexValue] = useLocalStorage(
-    "statementIndex",
-    0
-  );
 
   useEffect(() => {
+    const courseIdValue = localStorage.getItem("courseId");
+    const statementIndexValue = localStorage.getItem("statementIndex");
+
     const fetchCourseData = async () => {
       let cId = currentCourseId;
       if (!currentCourseId) {
@@ -44,20 +40,16 @@ export default function Home() {
 
       if (cId) {
         useCourse.setState({ currentCourseId: cId });
-        saveCourseIdValue(cId);
+        localStorage.setItem("courseId", cId);
         fetchCourse(cId);
       }
     };
 
     fetchCourseData();
-    if (statementIndexValue > 0) {
-      useCourse.setState({ statementIndex: statementIndexValue });
+    if (statementIndexValue) {
+      useCourse.setState({ statementIndex: Number(statementIndexValue) });
     }
   }, [currentCourseId]);
-
-  useEffect(() => {
-    saveStatementIndexValue(statementIndex)
-  }, [statementIndex])
 
   useEffect(() => {
     function handleKeyDown(event: any) {
@@ -71,6 +63,11 @@ export default function Home() {
     };
   }, [count]);
 
+  useEffect(() => {
+    if (statementIndex) {
+      localStorage.setItem("statementIndex", statementIndex + "");
+    }
+  }, [statementIndex]);
 
   const showAnswerNow = () => {
     setCurrentMode("answer");
