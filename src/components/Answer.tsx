@@ -18,6 +18,8 @@ export default function Answer({
   const handleKeyDown = (event:any) => {
     if (event.key === 'Enter') {
       onToNextStatement()
+    } else if (event.key === ' ' || event.code === 'Space') {
+      handlePlaySoundmark()
     }
   };
   useEffect(() => {
