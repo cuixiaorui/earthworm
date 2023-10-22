@@ -11,50 +11,9 @@ const env = {
     datasourceUrl: "postgresql://postgres:postgres@localhost:5432/postgres",
   },
   prod: {
-    courses: [
-      {
-        cId: "clng5l3300000fydlimlj4m4h",
-        fileName: "01",
-      },
-      {
-        cId: "clng5qbbh0001fydlyffbgc4x",
-        fileName: "02",
-      },
-      {
-        cId: "clnhlx86f0000fyi1m2os9f02",
-        fileName: "03",
-      },
-      {
-        cId: "clnzeuwy90000qxzc8k2waq2y",
-        fileName: "04",
-      },
-      {
-        cId: "clnzev8wj0001qxzczi2jcqas",
-        fileName: "05",
-      },
-      {
-        cId: "clnzevjoq0002qxzcks35dcz1",
-        fileName: "06",
-      },
-      {
-        cId: "clnzew8ns0003qxzcapdan1aa",
-        fileName: "07",
-      },
-      {
-        cId: "clnzf09sh0004qxzcsdp49wb1",
-        fileName: "08",
-      },
-      {
-        cId: "clnzf0qtd0005qxzcwei5mp89",
-        fileName: "09",
-      },
-      {
-        cId: "clnzf3dnm0006qxzcr94po5kj",
-        fileName: "10",
-      },
-    ],
+    courses: JSON.parse(fs.readFileSync("./courses.json")),
     datasourceUrl:
-      "postgres://default:eRPmUKwp30Lq@ep-noisy-dust-62046687.us-east-1.postgres.vercel-storage.com/verceldb",
+      "postgres://default:HF5qtvR7Ynbf@ep-delicate-frog-57631118-pooler.us-east-1.postgres.vercel-storage.com/verceldb",
   },
 };
 
@@ -75,12 +34,13 @@ const env = {
     datasourceUrl,
   });
 
+ 
+
   await prisma.statement.deleteMany();
 
   let orderIndex = 1;
   for (const { cId, fileName } of courses) {
-    const currentCourseDataPath = `./courses/${fileName}.json`;
-    const courseDataText = fs.readFileSync(currentCourseDataPath, "utf-8");
+    const courseDataText = fs.readFileSync(`./courses/${fileName}.json`, "utf-8");
     const courseData = JSON.parse(courseDataText);
 
     const promiseAll = courseData.map((statement, index) => {

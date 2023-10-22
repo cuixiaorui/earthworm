@@ -14,7 +14,7 @@ export async function fetchCourses(): Promise<Course[]> {
 }
 
 export async function fetchCourseById(courseId: string): Promise<Course> {
-  const response = await fetch(`/course/${courseId}/api`);
+  const response = await fetch(toUrl(`/course/${courseId}/api`));
 
   const data = await response.json();
 

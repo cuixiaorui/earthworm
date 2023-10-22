@@ -2,10 +2,6 @@ const fs = require("fs");
 const { PrismaClient } = require("@prisma/client");
 
 // 这里只需要处理本地创建的逻辑就可以
-const prisma = new PrismaClient({
-  datasourceUrl: "postgresql://postgres:postgres@localhost:5432/postgres",
-});
-
 const courses = [
   {
     title: "第一课",
@@ -59,7 +55,7 @@ const courses = [
   });
 
   // 先删除所有的 courses
-  await prisma.course.deleteMany()
+  await prisma.course.deleteMany();
 
   const result = [];
 
@@ -77,7 +73,6 @@ const courses = [
     });
   }
 
-  fs.writeFileSync("./courses.json", JSON.stringify(result))
-  console.log("生成 courses.json 成功")
+  fs.writeFileSync("./courses.json", JSON.stringify(result));
+  console.log("生成 courses.json 成功");
 })();
-
