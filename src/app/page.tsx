@@ -6,6 +6,8 @@ import Answer from "@/components/Answer";
 // import Statistics from "@/components/Statistics";
 import { useCourse, useFailedCount } from "@/store";
 import Header from "@/components/Header";
+import { fetchCourses } from "@/api/course";
+import { useLocalStorage } from "@uidotdev/usehooks";
 
 export default function Home() {
   const [currentMode, setCurrentMode] = useState<"question" | "answer">(
@@ -14,25 +16,48 @@ export default function Home() {
 
   const { count, increaseFailedCount, resetFailedCount } = useFailedCount();
   const {
-    currentCourse,
+    currentCourseId,
+    statementIndex,
     toNextStatement,
     fetchCourse,
     getCurrentStatement,
     checkCorrect,
   } = useCourse();
   const [isShowAnswerNowBtn, setIsShowAnswerNowBtn] = useState(false);
+  const [courseIdValue, saveCourseIdValue] = useLocalStorage("courseId", "");
+  const [statementIndexValue, saveStatementIndexValue] = useLocalStorage(
+    "statementIndex",
+    0
+  );
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch("/course/api");
-      const { data: courses } = await response.json();
-      fetchCourse(courses[0].id);
+    const fetchCourseData = async () => {
+      let cId = currentCourseId;
+      if (!currentCourseId) {
+        if (courseIdValue) {
+          cId = courseIdValue;
+        } else {
+          const courses = await fetchCourses();
+          cId = courses[0].id;
+        }
+      }
+
+      if (cId) {
+        useCourse.setState({ currentCourseId: cId });
+        saveCourseIdValue(cId);
+        fetchCourse(cId);
+      }
     };
 
-    if (!currentCourse) {
-      fetchData();
+    fetchCourseData();
+    if (statementIndexValue > 0) {
+      useCourse.setState({ statementIndex: statementIndexValue });
     }
-  }, []);
+  }, [currentCourseId]);
+
+  useEffect(() => {
+    saveStatementIndexValue(statementIndex)
+  }, [statementIndex])
 
   useEffect(() => {
     function handleKeyDown(event: any) {
@@ -45,6 +70,7 @@ export default function Home() {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [count]);
+
 
   const showAnswerNow = () => {
     setCurrentMode("answer");

@@ -1,4 +1,6 @@
 import { create } from "zustand";
+import { fetchCourseById } from "@/api/course";
+import { Course } from "@prisma/client";
 
 interface Statement {
   chinese: string;
@@ -15,21 +17,23 @@ interface CourseData {
 interface State {
   statementIndex: number;
   currentCourse?: CourseData;
+  currentCourseId?: Course["id"];
   toNextStatement: () => void;
   fetchCourse: (courseId: CourseData["id"]) => void;
   getCurrentStatement: () => Statement | undefined;
   checkCorrect: (input: string) => boolean;
 }
 
-export const useCourse = create<State>((set, get) => ({
+export const useCourse = create<State>((set, get, api) => ({
   statementIndex: 0,
   currentCourse: undefined,
-  async fetchCourse(courseId: CourseData["id"]) {
-    const response = await fetch(`/course/${courseId}/api`);
-    const data = await response.json();
-    set({ currentCourse: data.data });
-  },
+  currentCourseId: "",
 
+  async fetchCourse(courseId: CourseData["id"]) {
+    const course = (await fetchCourseById(courseId)) as CourseData;
+
+    set({ currentCourse: course });
+  },
 
   toNextStatement() {
     set((state) => {

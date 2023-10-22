@@ -17,6 +17,9 @@ dependencies:
   '@types/react-dom':
     specifier: 18.2.7
     version: registry.npmmirror.com/@types/react-dom@18.2.7
+  '@uidotdev/usehooks':
+    specifier: ^2.4.0
+    version: registry.npmmirror.com/@uidotdev/usehooks@2.4.0(react-dom@18.2.0)(react@18.2.0)
   autoprefixer:
     specifier: 10.4.16
     version: registry.npmmirror.com/autoprefixer@10.4.16(postcss@8.4.30)
@@ -44,6 +47,9 @@ dependencies:
   react-dom:
     specifier: 18.2.0
     version: registry.npmmirror.com/react-dom@18.2.0(react@18.2.0)
+  swr:
+    specifier: ^2.2.4
+    version: registry.npmmirror.com/swr@2.2.4(react@18.2.0)
   tailwindcss:
     specifier: 3.3.3
     version: registry.npmmirror.com/tailwindcss@3.3.3
@@ -776,6 +782,20 @@ packages:
     dependencies:
       '@typescript-eslint/types': registry.npmmirror.com/@typescript-eslint/types@6.7.4
       eslint-visitor-keys: registry.npmmirror.com/eslint-visitor-keys@3.4.3
+    dev: false
+
+  registry.npmmirror.com/@uidotdev/usehooks@2.4.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-NrpTsZUGsawYxFbEXrd8+FPpfziC4M01GSQgYWOnGa84UiavqVCzCL5bSRe6rfQc4QsHS2rGAA0h63ya/j+p6A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@uidotdev/usehooks/-/usehooks-2.4.0.tgz}
+    id: registry.npmmirror.com/@uidotdev/usehooks/2.4.0
+    name: '@uidotdev/usehooks'
+    version: 2.4.0
+    engines: {node: '>=16'}
+    peerDependencies:
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
+    dependencies:
+      react: registry.npmmirror.com/react@18.2.0
+      react-dom: registry.npmmirror.com/react-dom@18.2.0(react@18.2.0)
     dev: false
 
   registry.npmmirror.com/@vitest/expect@0.34.6:
@@ -3719,6 +3739,19 @@ packages:
     name: supports-preserve-symlinks-flag
     version: 1.0.0
     engines: {node: '>= 0.4'}
+    dev: false
+
+  registry.npmmirror.com/swr@2.2.4(react@18.2.0):
+    resolution: {integrity: sha512-njiZ/4RiIhoOlAaLYDqwz5qH/KZXVilRLvomrx83HjzCWTfa+InyfAjv05PSFxnmLzZkNO9ZfvgoqzAaEI4sGQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/swr/-/swr-2.2.4.tgz}
+    id: registry.npmmirror.com/swr/2.2.4
+    name: swr
+    version: 2.2.4
+    peerDependencies:
+      react: ^16.11.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      client-only: registry.npmmirror.com/client-only@0.0.1
+      react: registry.npmmirror.com/react@18.2.0
+      use-sync-external-store: registry.npmmirror.com/use-sync-external-store@1.2.0(react@18.2.0)
     dev: false
 
   registry.npmmirror.com/tailwindcss@3.3.3:
