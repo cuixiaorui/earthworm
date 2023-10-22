@@ -7,12 +7,21 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
     "test": "vitest run",
     "postinstall": "prisma generate",
     "studio:dev": "dotenv -e .env.local -- npx prisma studio",
     "studio:prod": "npx prisma studio",
     "db:init": "dotenv -e .env.local -- npx prisma migrate dev && cd ./scripts && node createCourses.js && NODE_ENV=dev node uploadCourseData.js",
     "db:start": "docker-compose up"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npm exec lint-staged"
+  },
+  "lint-staged": {
+    "src/**/*.ts?(x)": [
+      "eslint --fix"
+    ]
   },
   "dependencies": {
     "@prisma/client": "^5.4.1",
@@ -22,7 +31,6 @@
     "@uidotdev/usehooks": "^2.4.0",
     "autoprefixer": "10.4.16",
     "axios": "^1.5.1",
-    "eslint": "8.49.0",
     "eslint-config-next": "13.5.2",
     "next": "13.5.2",
     "next-themes": "^0.2.1",
@@ -38,6 +46,11 @@
     "dotenv-cli": "^7.3.0",
     "pdf-parse": "^1.1.1",
     "prisma": "^5.4.1",
-    "vitest": "^0.34.6"
+    "vitest": "^0.34.6",
+    "eslint": "8.49.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "lint-staged": "^15.0.2",
+    "prettier": "^3.0.3",
+    "simple-git-hooks": "^2.9.0"
   }
 }

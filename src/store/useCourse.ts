@@ -49,6 +49,6 @@ export const useCourse = create<State>((set, get, api) => ({
   },
   checkCorrect(input: string) {
     const currentStatement = get().getCurrentStatement();
-    return input === currentStatement?.english;
+    return input.toLocaleLowerCase() === currentStatement?.english.toLocaleLowerCase();
   },
 }));
