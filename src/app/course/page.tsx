@@ -4,7 +4,17 @@ import { fetchCourses } from "@/api/course";
 import Link from "next/link";
 
 export default async function Course() {
-  const courses = await fetchCourses();
+  // const courses = await fetchCourses();
+  const courses = [
+    {
+      title: "第一课",
+      id: "clo1kozag0000qxnkr2sn1x0a",
+    },
+    {
+      title: "第二课",
+      id: "clo1kozak0001qxnko2mflq7i",
+    },
+  ];
 
   return (
     <div className=" p-16 relative  h-screen flex flex-col ">
