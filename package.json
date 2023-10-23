@@ -35,6 +35,7 @@
     "next": "13.5.2",
     "next-themes": "^0.2.1",
     "postcss": "8.4.30",
+    "prisma": "^5.4.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "swr": "^2.2.4",
@@ -44,13 +45,12 @@
   },
   "devDependencies": {
     "dotenv-cli": "^7.3.0",
-    "pdf-parse": "^1.1.1",
-    "prisma": "^5.4.1",
-    "vitest": "^0.34.6",
     "eslint": "8.49.0",
     "eslint-plugin-prettier": "^5.0.1",
     "lint-staged": "^15.0.2",
+    "pdf-parse": "^1.1.1",
     "prettier": "^3.0.3",
-    "simple-git-hooks": "^2.9.0"
+    "simple-git-hooks": "^2.9.0",
+    "vitest": "^0.34.6"
   }
 }
