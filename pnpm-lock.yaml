@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@prisma/client':
-    specifier: ^5.4.1
-    version: registry.npmmirror.com/@prisma/client@5.4.1(prisma@5.4.2)
+    specifier: ^5.4.2
+    version: registry.npmmirror.com/@prisma/client@5.4.2(prisma@5.4.2)
   '@types/node':
     specifier: 20.6.3
     version: registry.npmmirror.com/@types/node@20.6.3
@@ -620,11 +620,11 @@ packages:
       tslib: registry.npmmirror.com/tslib@2.6.2
     dev: true
 
-  registry.npmmirror.com/@prisma/client@5.4.1(prisma@5.4.2):
-    resolution: {integrity: sha512-xyD0DJ3gRNfLbPsC+YfMBBuLJtZKQfy1OD2qU/PZg+HKrr7SO+09174LMeTlWP0YF2wca9LxtVd4HnAiB5ketQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@prisma/client/-/client-5.4.1.tgz}
-    id: registry.npmmirror.com/@prisma/client/5.4.1
+  registry.npmmirror.com/@prisma/client@5.4.2(prisma@5.4.2):
+    resolution: {integrity: sha512-2xsPaz4EaMKj1WS9iW6MlPhmbqtBsXAOeVttSePp8vTFTtvzh2hZbDgswwBdSCgPzmmwF+tLB259QzggvCmJqA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@prisma/client/-/client-5.4.2.tgz}
+    id: registry.npmmirror.com/@prisma/client/5.4.2
     name: '@prisma/client'
-    version: 5.4.1
+    version: 5.4.2
     engines: {node: '>=16.13'}
     requiresBuild: true
     peerDependencies:
@@ -633,14 +633,14 @@ packages:
       prisma:
         optional: true
     dependencies:
-      '@prisma/engines-version': registry.npmmirror.com/@prisma/engines-version@5.4.1-1.2f302df92bd8945e20ad4595a73def5b96afa54f
+      '@prisma/engines-version': registry.npmmirror.com/@prisma/engines-version@5.4.1-2.ac9d7041ed77bcc8a8dbd2ab6616b39013829574
       prisma: registry.npmmirror.com/prisma@5.4.2
     dev: false
 
-  registry.npmmirror.com/@prisma/engines-version@5.4.1-1.2f302df92bd8945e20ad4595a73def5b96afa54f:
-    resolution: {integrity: sha512-+nUQM/y8C+1GG5Ioeqcu6itFslCfxvQSAUVSMC9XM2G2Fcq0F4Afnp6m0pXF6X6iUBWen7jZBPmM9Qlq4Nr3/A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@prisma/engines-version/-/engines-version-5.4.1-1.2f302df92bd8945e20ad4595a73def5b96afa54f.tgz}
+  registry.npmmirror.com/@prisma/engines-version@5.4.1-2.ac9d7041ed77bcc8a8dbd2ab6616b39013829574:
+    resolution: {integrity: sha512-wvupDL4AA1vf4TQNANg7kR7y98ITqPsk6aacfBxZKtrJKRIsWjURHkZCGcQliHdqCiW/hGreO6d6ZuSv9MhdAA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@prisma/engines-version/-/engines-version-5.4.1-2.ac9d7041ed77bcc8a8dbd2ab6616b39013829574.tgz}
     name: '@prisma/engines-version'
-    version: 5.4.1-1.2f302df92bd8945e20ad4595a73def5b96afa54f
+    version: 5.4.1-2.ac9d7041ed77bcc8a8dbd2ab6616b39013829574
     dev: false
 
   registry.npmmirror.com/@prisma/engines@5.4.2:
