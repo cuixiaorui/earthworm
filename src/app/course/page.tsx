@@ -24,9 +24,9 @@ export default async function Course() {
               stroke-linejoin="round"
               stroke-width="2"
               d="M18 6L6 18M6 6l12 12"
-            ></path>{" "}
-          </svg>{" "}
-        </Link>{" "}
+            ></path>
+          </svg>
+        </Link>
         <h1 className="m-4 text-3xl text-indigo-500 ml-0 "> English course </h1>
       </div>
       <div className=" overflow-y-auto scrollbar-hide h-full ">
