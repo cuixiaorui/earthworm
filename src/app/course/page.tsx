@@ -1,10 +1,10 @@
-// import { CourseCard } from "@/components/CourseCard";
-// import { fetchCourses } from "@/api/course";
+import { CourseCard } from "@/components/CourseCard";
+import { fetchCourses } from "@/api/course";
 
 import Link from "next/link";
 
 export default async function Course() {
-  // const courses = await fetchCourses();
+  const courses = await fetchCourses();
 
   return (
     <div className=" p-16 relative  h-screen flex flex-col ">
@@ -31,13 +31,13 @@ export default async function Course() {
       </div>
       <div className="overflow-y-auto scrollbar-hide h-full">
         <ul className="flex gap-14  flex-wrap p-1 overflow-y-auto md:justify-start justify-center">
-          {/* {courses.map((course) => {
+          {courses.map((course) => {
             return (
               <li key={course.id}>
-                <CourseCard course={course}></CourseCard>
+                {/* <CourseCard course={course}></CourseCard> */}
               </li>
             );
-          })} */}
+          })}
         </ul>
       </div>
     </div>
