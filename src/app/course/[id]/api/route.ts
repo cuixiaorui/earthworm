@@ -1,11 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
-
 export async function GET(
   request: Request,
   { params }: { params: { id: string } },
 ) {
+  const prisma = new PrismaClient();
+
   const id = params.id;
   const course = await prisma.course.findFirst({
     select: {
