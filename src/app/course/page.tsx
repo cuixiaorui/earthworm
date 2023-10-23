@@ -4,7 +4,12 @@ import { fetchCourses } from "@/api/course";
 import Link from "next/link";
 
 export default async function Course() {
-  const courses = await fetchCourses();
+  // const courses = await fetchCourses();
+
+  const courses = [
+    { title: "第一课", id: "123" },
+    { title: "第二课", id: "345" },
+  ];
 
   return (
     <div className=" p-16 relative  h-screen flex flex-col ">
@@ -34,7 +39,7 @@ export default async function Course() {
           {courses.map((course) => {
             return (
               <li key={course.id}>
-                {/* <CourseCard course={course}></CourseCard> */}
+                <CourseCard course={course}></CourseCard>
               </li>
             );
           })}
