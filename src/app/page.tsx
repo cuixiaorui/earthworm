@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Question from "@/components/Question";
 import Answer from "@/components/Answer";
 // import Statistics from "@/components/Statistics";
-import { useCourse, useFailedCount } from "@/store";
+import { useCourse } from "@/store";
 import Header from "@/components/Header";
 import { fetchCourses } from "@/api/course";
 
@@ -12,7 +12,6 @@ export default function Home() {
   const [currentMode, setCurrentMode] = useState<"question" | "answer">(
     "question",
   );
-  const { count, increaseFailedCount, resetFailedCount } = useFailedCount();
   const {
     currentCourseId,
     statementIndex,
@@ -21,7 +20,6 @@ export default function Home() {
     getCurrentStatement,
     checkCorrect,
   } = useCourse();
-  const [isShowAnswerNowBtn, setIsShowAnswerNowBtn] = useState(false);
 
   useEffect(() => {
     const courseIdValue = localStorage.getItem("courseId");
@@ -53,7 +51,7 @@ export default function Home() {
 
   useEffect(() => {
     function handleKeyDown(event: any) {
-      if (event.key === "Tab" && count >= 2) {
+      if (event.key === "Tab") {
         showAnswerNow();
       }
     }
@@ -61,7 +59,7 @@ export default function Home() {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [count]);
+  }, []);
 
   useEffect(() => {
     if (statementIndex) {
@@ -71,8 +69,6 @@ export default function Home() {
 
   const showAnswerNow = () => {
     setCurrentMode("answer");
-    setIsShowAnswerNowBtn(false);
-    resetFailedCount();
   };
 
   const handleToNextStatement = () => {
@@ -83,10 +79,6 @@ export default function Home() {
   const handleCheckAnswer = (userInput: string) => {
     if (checkCorrect(userInput)) {
       showAnswerNow();
-    } else {
-      increaseFailedCount(() => {
-        setIsShowAnswerNowBtn(true);
-      });
     }
   };
 
@@ -108,17 +100,15 @@ export default function Home() {
                         lineNum={lineNum}
                         onCheckAnswer={handleCheckAnswer}
                       ></Question>
-                      {isShowAnswerNowBtn && (
-                        <div className="flex gap-x-2 text-sm">
-                          <button
-                            className="rounded-sm px-2 bg-gray-600 text-white dark:text-gray-900"
-                            onClick={showAnswerNow}
-                          >
-                            tap
-                          </button>
-                          <div className=" text-gray-600"> - show answer</div>
-                        </div>
-                      )}
+                      <div className="flex gap-x-2 text-sm">
+                        <button
+                          className="rounded-sm px-2 bg-gray-600 text-white dark:text-gray-900"
+                          onClick={showAnswerNow}
+                        >
+                          tab
+                        </button>
+                        <div className=" text-gray-600"> - show answer</div>
+                      </div>
                     </>
                   ) : (
                     <Answer
