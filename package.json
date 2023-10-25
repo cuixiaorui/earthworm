@@ -11,9 +11,7 @@
     "lint:fix": "next lint --fix",
     "test": "vitest run",
     "postinstall": "prisma generate",
-    "studio:dev": "dotenv -e .env.local -- npx prisma studio",
-    "studio:prod": "npx prisma studio",
-    "db:init": "dotenv -e .env.local -- npx prisma migrate dev && cd ./scripts && node createCourses.js && NODE_ENV=dev node uploadCourseData.js",
+    "db:init": "dotenv -e .env.local -- npx prisma migrate dev && node scripts/createCourses.js && node scripts/uploadCourseData.js",
     "db:start": "docker-compose up"
   },
   "simple-git-hooks": {
@@ -45,6 +43,7 @@
     "zustand": "^4.4.2"
   },
   "devDependencies": {
+    "dotenv": "^16.3.1",
     "dotenv-cli": "^7.3.0",
     "eslint": "8.49.0",
     "eslint-plugin-prettier": "^5.0.1",

@@ -4,42 +4,42 @@
 // 平时的开发也无需执行该脚本 数据已经全部推上去了
 const fs = require("fs");
 const { PrismaClient } = require("@prisma/client");
+const path = require("path");
+const dotenv = require("dotenv");
 
-const env = {
-  dev: {
-    courses: JSON.parse(fs.readFileSync("./courses.json")),
-    datasourceUrl: "mysql://root:password@127.0.0.1:3306/earthworm_dev",
-  },
-  prod: {
-    courses: JSON.parse(fs.readFileSync("./courses.json")),
-    datasourceUrl:
-      "mysql://root:earthworm_PROD@bj-cynosdbmysql-grp-841nzva0.sql.tencentcdb.com:20064/earthworm",
-  },
-};
+const isDev = process.env.NODE_ENV === "dev" || !process.env.NODE_ENV;
+
+if (isDev) {
+  dotenv.config({
+    path: path.resolve(__dirname, "../.env.local"),
+    override: true,
+  });
+} else if (process.env.NODE_ENV === "prod") {
+  dotenv.config({ path: path.resolve(__dirname, "../.env") });
+} else {
+  console.error(`无效的 NODE_ENV:${process.env.NODE_ENV}`);
+}
 
 (async function () {
-  if (!process.env.NODE_ENV) {
-    console.log("请指定要执行的环境: dev or prod");
-    return;
-  }
+  const courses = JSON.parse(
+    fs.readFileSync(path.resolve(__dirname, "./courses.json")),
+  );
+  const datasourceUrl = process.env.DATABASE_URL;
 
-  if (!(process.env.NODE_ENV === "dev" || process.env.NODE_ENV === "prod")) {
-    console.log("无效的环境 必须是 dev or prod");
-    return;
-  }
-
-  const { courses, datasourceUrl } = env[process.env.NODE_ENV];
+  console.log(courses, datasourceUrl);
 
   const prisma = new PrismaClient({
     datasourceUrl,
   });
 
-
   await prisma.statement.deleteMany();
 
   let orderIndex = 1;
   for (const { cId, fileName } of courses) {
-    const courseDataText = fs.readFileSync(`./courses/${fileName}.json`, "utf-8");
+    const courseDataText = fs.readFileSync(
+      path.resolve(__dirname, `./courses/${fileName}.json`),
+      "utf-8",
+    );
     const courseData = JSON.parse(courseDataText);
 
     const promiseAll = courseData.map((statement, index) => {
@@ -49,7 +49,7 @@ const env = {
         chinese,
         english,
         soundmark,
-        cId
+        cId,
       );
       orderIndex++;
       return result;

@@ -1,57 +1,28 @@
 const fs = require("fs");
+const path = require("path");
 const { PrismaClient } = require("@prisma/client");
+const dotenv = require("dotenv");
 
-// 这里只需要处理本地创建的逻辑就可以
-const courses = [
-  {
-    title: "第一课",
-    fileName: "01",
-  },
-  {
-    title: "第二课",
-    fileName: "02",
-  },
-  {
-    title: "第三课",
-    fileName: "03",
-  },
-  {
-    title: "第四课",
-    fileName: "04",
-  },
-  {
-    title: "第五课",
-    fileName: "05",
-  },
-  {
-    title: "第五.五课",
-    fileName: "05.5",
-  },
-  {
-    title: "第六课",
-    fileName: "06",
-  },
-  {
-    title: "第七课",
-    fileName: "07",
-  },
-  {
-    title: "第八课",
-    fileName: "08",
-  },
-  {
-    title: "第九课",
-    fileName: "09",
-  },
-  {
-    title: "第十课",
-    fileName: "10",
-  },
-];
+const isDev = process.env.NODE_ENV === "dev" || !process.env.NODE_ENV;
+
+if (isDev) {
+  dotenv.config({
+    path: path.resolve(__dirname, "../.env.local"),
+    override: true,
+  });
+} else if (process.env.NODE_ENV === "prod") {
+  dotenv.config({ path: path.resolve(__dirname, "../.env") });
+} else {
+  console.error(`无效的 NODE_ENV:${process.env.NODE_ENV}`);
+}
+
+const loadCourses = JSON.parse(
+  fs.readFileSync(path.resolve(__dirname, "./loadCourses.json"), "utf-8"),
+);
 
 (async function () {
   const prisma = new PrismaClient({
-    datasourceUrl: "mysql://root:password@127.0.0.1:3306/earthworm_dev",
+    datasourceUrl: process.env.DATABASE_URL,
   });
 
   // 先删除所有的 courses
@@ -59,7 +30,7 @@ const courses = [
 
   const result = [];
 
-  for (const course of courses) {
+  for (const course of loadCourses) {
     const response = await prisma.course.create({
       data: {
         title: course.title,
@@ -73,6 +44,9 @@ const courses = [
     });
   }
 
-  fs.writeFileSync("./courses.json", JSON.stringify(result));
+  fs.writeFileSync(
+    path.resolve(__dirname, "./courses.json"),
+    JSON.stringify(result),
+  );
   console.log("生成 courses.json 成功");
 })();

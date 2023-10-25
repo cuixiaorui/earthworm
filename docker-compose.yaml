@@ -1,9 +1,9 @@
 services:
-  postgres:
-    image: "postgres:15.2-alpine"
+  mysql:
+    image: mysql:latest
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: earthworm_dev
+    command: --default-authentication-plugin=mysql_native_password
     ports:
-      - "5432:5432"
+      - "3306:3306"

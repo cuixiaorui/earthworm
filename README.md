@@ -28,6 +28,6 @@ Note that this project depends on docker, so make sure that docker is installed 
 
 - nextjs
 - prisma
-- postgres
+- mysql
 - zustand
 
