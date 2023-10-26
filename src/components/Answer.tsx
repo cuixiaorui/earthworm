@@ -1,27 +1,26 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 export default function Answer({
   word,
   soundmark,
+  handlePlaySoundmark,
   onToNextStatement,
 }: {
   word: string;
   soundmark: string;
+  handlePlaySoundmark: () => void;
   onToNextStatement: () => void;
 }) {
-  const audioSrc = `https://dict.youdao.com/dictvoice?audio=${word}&type=1`;
-  const audioRef = useRef<any>(null);
-  const handlePlaySoundmark = () => {
-    audioRef.current.play();
-  };
-
   const handleKeyDown = (event: any) => {
     if (event.key === "Enter") {
       onToNextStatement();
-    } else if (event.key === " " || event.code === "Space") {
-      handlePlaySoundmark();
     }
   };
+
+  useEffect(() => {
+    handlePlaySoundmark();
+  }, []);
+
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
     return () => {
@@ -45,10 +44,6 @@ export default function Answer({
             fill="#666666"
           ></path>
         </svg>
-        <audio controls autoPlay className="hidden" ref={audioRef}>
-          <source src={audioSrc} type="audio/mpeg" />
-          Your browser does not support the audio element.
-        </audio>
       </div>
       <div className="text-2xl text-slate-600">{soundmark}</div>
       <button

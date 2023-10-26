@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Question from "@/components/Question";
 import Answer from "@/components/Answer";
 // import Statistics from "@/components/Statistics";
@@ -20,6 +20,10 @@ export default function Home() {
     getCurrentStatement,
     checkCorrect,
   } = useCourse();
+
+  const englishWord = getCurrentStatement()?.english || "";
+  const audioSrc = `https://dict.youdao.com/dictvoice?audio=${englishWord}&type=1`;
+  const audioRef = useRef<any>(null);
 
   useEffect(() => {
     const courseIdValue = localStorage.getItem("courseId");
@@ -54,6 +58,9 @@ export default function Home() {
       if (event.key === "Tab") {
         showAnswerNow();
       }
+      if (event.key === "Control") {
+        handlePlaySoundmark();
+      }
     }
     document.addEventListener("keydown", handleKeyDown);
     return () => {
@@ -80,6 +87,10 @@ export default function Home() {
     if (checkCorrect(userInput)) {
       showAnswerNow();
     }
+  };
+
+  const handlePlaySoundmark = () => {
+    audioRef.current.play();
   };
 
   const lineNum = getCurrentStatement()?.english.split(" ").length || 1;
@@ -109,14 +120,33 @@ export default function Home() {
                         </button>
                         <div className=" text-gray-600"> - show answer</div>
                       </div>
+                      <div className="flex gap-x-2 text-sm mt-3">
+                        <button
+                          className="rounded-sm px-2 bg-gray-600 text-white dark:text-gray-900"
+                          onClick={handlePlaySoundmark}
+                        >
+                          control
+                        </button>
+                        <div className=" text-gray-600"> - play soundmark</div>
+                      </div>
                     </>
                   ) : (
                     <Answer
                       word={getCurrentStatement()?.english || ""}
                       soundmark={getCurrentStatement()?.soundmark || ""}
+                      handlePlaySoundmark={handlePlaySoundmark}
                       onToNextStatement={handleToNextStatement}
                     ></Answer>
                   )}
+                  <audio
+                    controls
+                    className="hidden"
+                    key={englishWord}
+                    ref={audioRef}
+                  >
+                    <source src={audioSrc} type="audio/mpeg" />
+                    Your browser does not support the audio element.
+                  </audio>
                 </div>
               </div>
             </div>
