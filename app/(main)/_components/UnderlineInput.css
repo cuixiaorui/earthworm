@@ -1,0 +1,34 @@
+.code-box {
+  height: 10vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 80vw;
+  position: relative;
+  margin-top: 8px;
+}
+
+.code-box .code-item {
+  min-width: 10vw;
+  min-height: 6vh;
+  text-align: center;
+  font-size: 4vw;
+  transition: border 0.3s;
+  box-sizing: border-box;
+  margin-right: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.code-box .code-input {
+  position: absolute;
+  width: 100%;
+  
+  height: 100%;
+  opacity: 0;
+}
+
+.active {
+  border-bottom: 3px solid #1E80FF !important;
+}
