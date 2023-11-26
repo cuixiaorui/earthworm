@@ -1,7 +1,7 @@
 "use client";
 import { create } from "zustand";
 import { Prisma } from "@prisma/client";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { fetchSaveUserProgress } from "@/actions/userProgress";
 
 export type Statement = Prisma.StatementGetPayload<{
@@ -59,7 +59,7 @@ export const useCourse = create<State>((set, get) => ({
       currentStatement: newStatement,
     });
 
-    return nextStatementIndex
+    return nextStatementIndex;
   },
 }));
 
@@ -70,10 +70,20 @@ export function CourseStoreInitializer({
   course: Course;
   statementIndex: number;
 }) {
-  // useCourse 是一个 hooks  必须要在组件中调用
-  // 所以 StoreInitializer 是作为一个组件存在的
-  const { setupCourse } = useCourse();
+  const { setupCourse, currentCourse } = useCourse();
   const initialized = useRef(false);
+
+  useEffect(() => {
+    console.log("setup course", course.id, currentCourse);
+    if (currentCourse && course.id === currentCourse.id) {
+      return;
+    }
+    // 这里是从 summary 面板进入下一关  所以要从零开始
+    setupCourse(course, 0);
+  }, [course.id]);
+
+  // 一开始的时候必须需要赋值  不然其他 children 组件会获取不到 useCourse 的值
+  // 不能在 useEffect(,[]) 中调用 因为其他 children 获取 course 的时机要早于 useEffect  
   if (!initialized.current) {
     setupCourse(course, statementIndex);
     initialized.current = true;

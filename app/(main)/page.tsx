@@ -17,7 +17,7 @@ export default async function Page({ searchParams }: Props) {
 
   let courseId = searchParams.courseId;
   if (!courseId) {
-    const defaultCourseId = await fetchFirstCourseId()
+    const defaultCourseId = await fetchFirstCourseId();
     const activeCourseId =
       (user && (await fetchActiveCourseId(user.id))) || defaultCourseId;
 
@@ -27,6 +27,7 @@ export default async function Page({ searchParams }: Props) {
   const course = await fetchCourse(courseId);
   const statementIndex =
     (user && (await fetchStatementIndex(user.id, courseId))) || 0;
+
 
   return (
     <>

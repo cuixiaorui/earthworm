@@ -9,7 +9,7 @@ import { ToastAction } from "@/components/ui/toast";
 import { SignInButton } from "@clerk/nextjs";
 
 interface Props {
-  onShowQuestion: () => void;
+  onShowQuestion: (sIndex: number) => void;
 }
 
 export function Answer({ onShowQuestion }: Props) {
@@ -22,7 +22,7 @@ export function Answer({ onShowQuestion }: Props) {
 
   async function handleToNextStatement() {
     const nextStatementIndex = toNextStatement();
-    onShowQuestion();
+    onShowQuestion(nextStatementIndex);
 
     if (user) {
       const cId = currentCourse?.id!;
