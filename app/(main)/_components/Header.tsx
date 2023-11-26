@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 export const Header = () => {
@@ -10,7 +11,8 @@ export const Header = () => {
           </div>
           <h1 className="text-2xl font-bold text-fuchsia-500 ">EarthWorm</h1>
         </div>
-        <div>
+        <div className='flex gap-4 items-center'>
+          <Link href="/course">更多课程</Link>
           <UserButton></UserButton>
         </div>
       </div>

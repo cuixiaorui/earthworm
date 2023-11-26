@@ -1,20 +1,20 @@
-// import { useCourse } from "@/store";
+import { useCourse } from "@/store/course";
 import UnderlineInput from "./UnderlineInput";
 
-export function Question() {
-  // const { currentStatement: getCurrentStatement, checkCorrect } = useCourse();
-  // const word = getCurrentStatement()?.chinese;
-  // const lineNum = getCurrentStatement()?.english.split(" ").length || 1;
+interface Props {
+  onShowAnswer: () => void;
+}
 
-  const word = "你好";
-  const lineNum = "hi".length;
+export function Question({ onShowAnswer }: Props) {
+  const { currentStatement, checkCorrect } = useCourse();
+  const { chinese, english } = currentStatement!;
+  const word = chinese;
+  const lineNum = english.split(" ").length || 1;
 
   function handleCheckAnswer(input: string) {
-    // if (checkCorrect(input)) {
-    // useCourse.setState({
-    //   currentMode: "answer",
-    // });
-    // }
+    if (checkCorrect(input)) {
+      onShowAnswer();
+    }
   }
 
   return (

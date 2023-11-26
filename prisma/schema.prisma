@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Course {
+  id           String         @id @default(cuid())
+  title        String
+  statements   Statement[]
+  UserProgress UserProgress[]
+
+  @@map("courses")
+}
+
+model Statement {
+  id        Int     @id @default(autoincrement())
+  order     Int     @unique
+  chinese   String
+  english   String
+  soundmark String
+  courseId  String?
+  courses   Course? @relation(fields: [courseId], references: [id])
+
+  @@index([courseId], map: "Statement_courseId_fkey")
+  @@map("statements")
+}
+
+model UserProgress {
+  id             Int     @id @default(autoincrement())
+  userId         String
+  courseId       String
+  statementIndex Int
+  active         Boolean
+  courses        Course? @relation(fields: [courseId], references: [id])
+
+  @@unique([userId, courseId], name: "userId_courseId")
+  @@index([userId], name: "userId")
+}
