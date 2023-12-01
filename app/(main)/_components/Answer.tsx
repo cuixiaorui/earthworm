@@ -8,21 +8,15 @@ import { cn } from "@/lib/utils";
 import { ToastAction } from "@/components/ui/toast";
 import { SignInButton } from "@clerk/nextjs";
 
-interface Props {
-  onShowQuestion: (sIndex: number) => void;
-}
-
-export function Answer({ onShowQuestion }: Props) {
-  const { currentStatement, toNextStatement, statementIndex, currentCourse } =
-    useCourse();
-  const { english: word, soundmark } = currentStatement!;
+export function Answer() {
+  const { currentStatement, toNextStatement, currentCourse } = useCourse();
+  const { english: word = "", soundmark = "" } = currentStatement || {};
   const { playSound, audio } = usePlaySound();
   const { user } = useUser();
   const { toast } = useToast();
 
   async function handleToNextStatement() {
     const nextStatementIndex = toNextStatement();
-    onShowQuestion(nextStatementIndex);
 
     if (user) {
       const cId = currentCourse?.id!;

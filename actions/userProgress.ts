@@ -1,5 +1,9 @@
 "use server";
 import { prisma } from "@/lib/prisma";
+import { Course } from "@prisma/client";
+
+
+
 
 export async function fetchSaveUserProgress({
   userId,
@@ -7,11 +11,11 @@ export async function fetchSaveUserProgress({
   statementIndex,
 }: {
   userId: string;
-  courseId: string;
+  courseId: number;
   statementIndex: number;
 }) {
   // Deactivate all other courses
-  await deactivateAllCourses(userId);
+  // await deactivateAllCourses(userId);
 
   return await prisma.userProgress.upsert({
     where: { userId_courseId: { userId, courseId } },
@@ -20,12 +24,27 @@ export async function fetchSaveUserProgress({
   });
 }
 
-export async function deactivateAllCourses(userId: string) {
-  return await prisma.userProgress.updateMany({
-    where: { userId, active: true },
-    data: { active: false },
+export async function fetchResetUserProgress({
+  userId,
+  courseId,
+}: {
+  userId: string;
+  courseId: number;
+}) {
+  return await prisma.userProgress.upsert({
+    where: { userId_courseId: { userId, courseId } },
+    update: { statementIndex: 0, active: false },
+    create: { userId, courseId, statementIndex: 0, active: false },
   });
 }
+
+
+// export async function deactivateAllCourses(userId: string) {
+//   return await prisma.userProgress.updateMany({
+//     where: { userId, active: true },
+//     data: { active: false },
+//   });
+// }
 
 export async function fetchActiveCourseId(userId: string) {
   const userProgress = await prisma.userProgress.findFirst({
@@ -35,7 +54,7 @@ export async function fetchActiveCourseId(userId: string) {
   return userProgress?.courseId
 }
 
-export async function fetchStatementIndex(userId: string, courseId: string) {
+export async function fetchStatementIndex(userId: string, courseId: Course["id"]) {
   const userProgress = await prisma.userProgress.findUnique({
     where: { userId_courseId: { userId, courseId } },
   });

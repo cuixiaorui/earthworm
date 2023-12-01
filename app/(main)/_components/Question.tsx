@@ -7,7 +7,7 @@ interface Props {
 
 export function Question({ onShowAnswer }: Props) {
   const { currentStatement, checkCorrect } = useCourse();
-  const { chinese, english } = currentStatement!;
+  const { chinese = "", english = "" } = currentStatement || {};
   const word = chinese;
   const lineNum = english.split(" ").length || 1;
 

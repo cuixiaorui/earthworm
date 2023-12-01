@@ -12,7 +12,7 @@ export function Main() {
     "Question"
   );
 
-  const { currentCourse } = useCourse();
+  const { currentCourse, statementIndex } = useCourse();
 
   useEffect(() => {
     // 说明切换了 course
@@ -20,17 +20,25 @@ export function Main() {
     setMode("Question");
   }, [currentCourse?.id]);
 
+  useEffect(() => {
+    if (statementIndex >= currentCourse!.statements.length) {
+      setMode("Summary");
+    } else {
+      setMode("Question");
+    }
+  }, [statementIndex]);
+
   function handleShowAnswer() {
     setMode("Answer");
   }
 
   function handleShowQuestion(sIndex: number) {
-    if (sIndex >= currentCourse!.statements.length - 1) {
-      setMode("Summary");
-      return;
-    }
+    // if (sIndex >= currentCourse!.statements.length - 1) {
+    //   setMode("Summary");
+    //   return;
+    // }
 
-    setMode("Question");
+    // setMode("Question");
   }
 
   const viewMap = {

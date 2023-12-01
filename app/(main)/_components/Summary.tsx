@@ -1,17 +1,30 @@
+import { fetchNextCourseId } from "@/actions/course";
+import { useCourse } from "@/store/course";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export function Summary() {
-  // todo 如何获取到下一个 course 的 id
+  const [cId, setCId] = useState(0);
+  const { currentCourse } = useCourse();
+
+  useEffect(() => {
+    (async function () {
+      const cId = await fetchNextCourseId(currentCourse!.id);
+      if (cId) {
+        setCId(cId);
+      }
+    })();
+  });
+
   return (
-    <div className="h-48 bg-slate-100 shadow-lg text-center flex flex-col justify-around">
+    <div className="h-48 bg-slate-100 shadow-lg text-center flex flex-col">
       <h3>总结面板</h3>
-      <div>不错不错 又学到了那么多句子和单词 加油 坚持就是胜利 :)</div>
-      <Link
-        href="/?courseId=clpf1h3h80001z5m14mwemff0"
-        className="bg-slate-600 rounded"
-      >
-        开始下一课
-      </Link>
+      <div className="px-5 py-10">
+        不错不错 又学到了那么多句子和单词 加油 坚持就是胜利 :)
+      </div>
+      <div className="w-1/3 justify-items-center bg-fuchsia-500 rounded m-auto mb-8">
+        <Link href={`/?courseId=${cId}`}>开始下一课</Link>
+      </div>
     </div>
   );
 }

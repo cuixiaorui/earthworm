@@ -47,3 +47,18 @@ export async function fetchCourse(id: Course["id"]) {
     },
   });
 }
+
+export async function fetchNextCourseId(courseId: Course["id"]) {
+  const nextCourse = await prisma.course.findFirst({
+    where: {
+      id: {
+        gt: courseId,
+      },
+    },
+    orderBy: {
+      id: "asc",
+    },
+  });
+
+  return nextCourse?.id;
+}

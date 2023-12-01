@@ -15,7 +15,7 @@ interface Props {
 export default async function Page({ searchParams }: Props) {
   const user = await currentUser();
 
-  let courseId = searchParams.courseId;
+  let courseId = +searchParams.courseId;
   if (!courseId) {
     const defaultCourseId = await fetchFirstCourseId();
     const activeCourseId =

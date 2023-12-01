@@ -2,7 +2,12 @@
 import { create } from "zustand";
 import { Prisma } from "@prisma/client";
 import { useEffect, useRef } from "react";
-import { fetchSaveUserProgress } from "@/actions/userProgress";
+import {
+  fetchResetUserProgress,
+  fetchSaveUserProgress,
+  fetchStatementIndex,
+} from "@/actions/userProgress";
+import { useUser } from "@clerk/nextjs";
 
 export type Statement = Prisma.StatementGetPayload<{
   select: {
@@ -73,17 +78,26 @@ export function CourseStoreInitializer({
   const { setupCourse, currentCourse } = useCourse();
   const initialized = useRef(false);
 
+  const { user } = useUser();
+
   useEffect(() => {
-    console.log("setup course", course.id, currentCourse);
     if (currentCourse && course.id === currentCourse.id) {
       return;
     }
     // 这里是从 summary 面板进入下一关  所以要从零开始
+    const lastCourseId = currentCourse?.id;
+    // 还需要把上一个 course 的 进度缓存修改一下
+    fetchResetUserProgress({ userId: user!.id, courseId: lastCourseId! });
     setupCourse(course, 0);
+    fetchSaveUserProgress({
+      userId: user!.id,
+      courseId: course.id,
+      statementIndex: 0,
+    });
   }, [course.id]);
 
   // 一开始的时候必须需要赋值  不然其他 children 组件会获取不到 useCourse 的值
-  // 不能在 useEffect(,[]) 中调用 因为其他 children 获取 course 的时机要早于 useEffect  
+  // 不能在 useEffect(,[]) 中调用 因为其他 children 获取 course 的时机要早于 useEffect
   if (!initialized.current) {
     setupCourse(course, statementIndex);
     initialized.current = true;
