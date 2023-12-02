@@ -81,11 +81,13 @@ export function CourseStoreInitializer({
   const { user } = useUser();
 
   useEffect(() => {
-    if (currentCourse && course.id === currentCourse.id) {
+    if (!currentCourse) return;
+
+    if (course.id === currentCourse.id) {
       return;
     }
     // 这里是从 summary 面板进入下一关  所以要从零开始
-    const lastCourseId = currentCourse?.id;
+    const lastCourseId = currentCourse.id;
     // 还需要把上一个 course 的 进度缓存修改一下
     fetchResetUserProgress({ userId: user!.id, courseId: lastCourseId! });
     setupCourse(course, 0);

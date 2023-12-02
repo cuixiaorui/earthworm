@@ -32,19 +32,10 @@ export function Main() {
     setMode("Answer");
   }
 
-  function handleShowQuestion(sIndex: number) {
-    // if (sIndex >= currentCourse!.statements.length - 1) {
-    //   setMode("Summary");
-    //   return;
-    // }
-
-    // setMode("Question");
-  }
-
   const viewMap = {
     Summary: <Summary></Summary>,
     Question: <Question onShowAnswer={handleShowAnswer}></Question>,
-    Answer: <Answer onShowQuestion={handleShowQuestion}></Answer>,
+    Answer: <Answer></Answer>,
   };
 
   const CurrentView = viewMap[mode];
