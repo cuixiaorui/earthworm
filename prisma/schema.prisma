@@ -35,12 +35,10 @@ model Statement {
 
 model UserProgress {
   id             Int     @id @default(autoincrement())
-  userId         String
-  courseId       Int
+  courseId       Int     @unique
   statementIndex Int
   active         Boolean
   courses        Course? @relation(fields: [courseId], references: [id])
 
-  @@unique([userId, courseId], name: "userId_courseId")
-  @@index([userId], name: "userId")
+  @@index([courseId], name: "courseId")
 }

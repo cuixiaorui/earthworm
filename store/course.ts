@@ -5,9 +5,7 @@ import { useEffect, useRef } from "react";
 import {
   fetchResetUserProgress,
   fetchSaveUserProgress,
-  fetchStatementIndex,
 } from "@/actions/userProgress";
-import { useUser } from "@clerk/nextjs";
 
 export type Statement = Prisma.StatementGetPayload<{
   select: {
@@ -78,8 +76,6 @@ export function CourseStoreInitializer({
   const { setupCourse, currentCourse } = useCourse();
   const initialized = useRef(false);
 
-  const { user } = useUser();
-
   useEffect(() => {
     if (!currentCourse) return;
 
@@ -88,11 +84,9 @@ export function CourseStoreInitializer({
     }
     // 这里是从 summary 面板进入下一关  所以要从零开始
     const lastCourseId = currentCourse.id;
-    // 还需要把上一个 course 的 进度缓存修改一下
-    fetchResetUserProgress({ userId: user!.id, courseId: lastCourseId! });
+    fetchResetUserProgress({ courseId: lastCourseId! });
     setupCourse(course, 0);
     fetchSaveUserProgress({
-      userId: user!.id,
       courseId: course.id,
       statementIndex: 0,
     });

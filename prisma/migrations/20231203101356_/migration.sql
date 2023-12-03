@@ -23,13 +23,12 @@ CREATE TABLE `statements` (
 -- CreateTable
 CREATE TABLE `UserProgress` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `userId` VARCHAR(191) NOT NULL,
     `courseId` INTEGER NOT NULL,
     `statementIndex` INTEGER NOT NULL,
     `active` BOOLEAN NOT NULL,
 
-    INDEX `userId`(`userId`),
-    UNIQUE INDEX `UserProgress_userId_courseId_key`(`userId`, `courseId`),
+    UNIQUE INDEX `UserProgress_courseId_key`(`courseId`),
+    INDEX `courseId`(`courseId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

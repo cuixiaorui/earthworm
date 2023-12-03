@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 export const Header = () => {
   return (
@@ -13,7 +12,6 @@ export const Header = () => {
         </div>
         <div className='flex gap-4 items-center'>
           <Link href="/course">更多课程</Link>
-          <UserButton></UserButton>
         </div>
       </div>
     </header>

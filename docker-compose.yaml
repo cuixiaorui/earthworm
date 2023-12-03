@@ -1,20 +1,11 @@
 version: '3.8'
 
 services:
-  # mysql:
-  #   image: mysql:latest
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: password
-  #     MYSQL_DATABASE: earthworm_dev
-  #   command: --default-authentication-plugin=mysql_native_password
-  #   ports:
-  #     - "3306:3306"
-
-  nextjs:
-    build:
-      context: .
-    env_file:
-      - .env
-    image: new-earthworm-nextjs
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: earthworm_dev
+    command: --default-authentication-plugin=mysql_native_password
     ports:
-      - "3001:3001"
+      - "3306:3306"

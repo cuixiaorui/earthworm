@@ -1,44 +1,21 @@
 import { fetchSaveUserProgress } from "@/actions/userProgress";
 import { usePlaySound } from "../_hooks/playSound";
 import { useCourse } from "@/store/course";
-import { useUser } from "@clerk/nextjs";
 import { useEffect } from "react";
-import { useToast } from "@/components/ui/use-toast";
-import { cn } from "@/lib/utils";
-import { ToastAction } from "@/components/ui/toast";
-import { SignInButton } from "@clerk/nextjs";
 
 export function Answer() {
   const { currentStatement, toNextStatement, currentCourse } = useCourse();
   const { english: word = "", soundmark = "" } = currentStatement || {};
   const { playSound, audio } = usePlaySound();
-  const { user } = useUser();
-  const { toast } = useToast();
 
   async function handleToNextStatement() {
     const nextStatementIndex = toNextStatement();
-
-    if (user) {
-      const cId = currentCourse?.id!;
-      await fetchSaveUserProgress({
-        userId: user.id,
-        courseId: cId,
-        statementIndex: nextStatementIndex,
-      });
-    } else {
-      toast({
-        className: cn(
-          "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
-        ),
-        title: "是否登录",
-        description: "登录后可以保存您的进度 要不要登录呀 :)",
-        action: (
-          <ToastAction altText="Sign in">
-            <SignInButton>Sign in</SignInButton>
-          </ToastAction>
-        ),
-      });
-    }
+    const cId = currentCourse?.id!;
+    console.log("?????????", cId, nextStatementIndex)
+    await fetchSaveUserProgress({
+      courseId: cId,
+      statementIndex: nextStatementIndex,
+    });
   }
 
   useEffect(() => {

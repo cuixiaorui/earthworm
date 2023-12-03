@@ -14,16 +14,6 @@ export async function fetchCourseList() {
   return courses;
 }
 
-export async function fetchFirstCourseId() {
-  const courses = await prisma.course.findFirst({
-    select: {
-      id: true,
-    },
-  });
-
-  return courses?.id;
-}
-
 export async function fetchCourse(id: Course["id"]) {
   return await prisma.course.findFirst({
     select: {
