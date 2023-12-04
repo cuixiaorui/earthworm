@@ -4,12 +4,14 @@ import { useCourse } from "@/store/course";
 export function CourseProgress() {
   const { statementIndex, currentCourse } = useCourse();
 
-  const max = currentCourse?.statements.length
-  const value = statementIndex + 1
+  const max = currentCourse?.statements.length || 0;
+  const value = statementIndex + 1;
+
+  const percent = (value / max) * 100
 
   return (
     <>
-      <Progress value={value} max={max} className="w-1/4 mb-6" />
+      <Progress value={percent} className="w-1/4 mb-6" />
     </>
   );
 }
