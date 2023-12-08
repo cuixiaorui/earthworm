@@ -76,6 +76,9 @@ devDependencies:
   eslint-config-next:
     specifier: 14.0.3
     version: registry.npmmirror.com/eslint-config-next@14.0.3(eslint@8.53.0)(typescript@5.2.2)
+  pdf-parse:
+    specifier: ^1.1.1
+    version: registry.npmmirror.com/pdf-parse@1.1.1
   postcss:
     specifier: ^8
     version: registry.npmmirror.com/postcss@8.4.31
@@ -3079,6 +3082,12 @@ packages:
       - babel-plugin-macros
     dev: false
 
+  registry.npmmirror.com/node-ensure@0.0.0:
+    resolution: {integrity: sha512-DRI60hzo2oKN1ma0ckc6nQWlHU69RH6xN0sjQTjMpChPfTYvKZdcQFfdYK2RWbJcKyUizSIy/l8OTGxMAM1QDw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/node-ensure/-/node-ensure-0.0.0.tgz}
+    name: node-ensure
+    version: 0.0.0
+    dev: true
+
   registry.npmmirror.com/node-releases@2.0.13:
     resolution: {integrity: sha512-uYr7J37ae/ORWdZeQ1xxMJe3NtdmqMC/JZK+geofDrkLUApKRHPd18/TxtBOJ4A0/+uUIliorNrfYV6s1b02eQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/node-releases/-/node-releases-2.0.13.tgz}
     name: node-releases
@@ -3266,6 +3275,18 @@ packages:
     name: path-type
     version: 4.0.0
     engines: {node: '>=8'}
+    dev: true
+
+  registry.npmmirror.com/pdf-parse@1.1.1:
+    resolution: {integrity: sha512-v6ZJ/efsBpGrGGknjtq9J/oC8tZWq0KWL5vQrk2GlzLEQPUDB1ex+13Rmidl1neNN358Jn9EHZw5y07FFtaC7A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/pdf-parse/-/pdf-parse-1.1.1.tgz}
+    name: pdf-parse
+    version: 1.1.1
+    engines: {node: '>=6.8.1'}
+    dependencies:
+      debug: registry.npmmirror.com/debug@3.2.7
+      node-ensure: registry.npmmirror.com/node-ensure@0.0.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.npmmirror.com/picocolors@1.0.0:

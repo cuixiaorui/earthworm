@@ -865,12 +865,12 @@
 		"soundmark": "/so/"
 	},
 	{
-		"chinese": "它是重要的对我来说，所以我必须做这件事",
+		"chinese": "它是重要的对我来说所以我必须做这件事",
 		"english": "It is important for me so I have to do it",
 		"soundmark": "/ɪt/ /ɪz/ /ɪm'pɔrtnt/ /fɝ/ /mi/ /so/ /aɪ/ /hæv/ /tə/ /du/ /ɪt/"
 	},
 	{
-		"chinese": "它是重要的对我来说，所以我今天必须做这件事",
+		"chinese": "它是重要的对我来说所以我今天必须做这件事",
 		"english": "It is important for me so I have to do it today",
 		"soundmark": "/ɪt/ /ɪz/ /ɪm'pɔrtnt/ /fɝ/ /mi/ /so/ /aɪ/ /hæv/ /tə/ /du/ /ɪt/ /tə'de/"
 	},
@@ -880,7 +880,7 @@
 		"soundmark": "/'ɛvri/ /de/"
 	},
 	{
-		"chinese": "它是重要的对我来说，所以我必须每天做这件事",
+		"chinese": "它是重要的对我来说所以我必须每天做这件事",
 		"english": "It is important for me so I have to do it every day",
 		"soundmark": "/ɪt/ /ɪz/ /ɪm'pɔrtnt/ /fɝ/ /mi/ /so/ /aɪ/ /hæv/ /tə/ /du/ /ɪt/ /'ɛvri/ /de/"
 	},
@@ -890,7 +890,7 @@
 		"soundmark": "/ˈvɛri/"
 	},
 	{
-		"chinese": "它是非常重要的对我来说，所以我必须每天做这件事",
+		"chinese": "它是非常重要的对我来说所以我必须每天做这件事",
 		"english": "It is very important for me so I have to do it every day",
 		"soundmark": "/ɪt/ /ɪz/ /ˈvɛri/ /ɪm'pɔrtnt/ /fɝ/ /mi/ /so/ /aɪ/ /hæv/ /tə/ /du/ /ɪt/ /'ɛvri/ /de/"
 	},
@@ -900,7 +900,7 @@
 		"soundmark": "/naʊ/"
 	},
 	{
-		"chinese": "它是非常重要的对我来说，所以我必须现在做这件事",
+		"chinese": "它是非常重要的对我来说所以我必须现在做这件事",
 		"english": "It is very important for me so I have to do it now",
 		"soundmark": "/ɪt/ /ɪz/ /ˈvɛri/ /ɪm'pɔrtnt/ /fɝ/ /mi/ /so/ /aɪ/ /hæv/ /tə/ /du/ /ɪt/ /naʊ/"
 	},
@@ -945,7 +945,7 @@
 		"soundmark": "/so/"
 	},
 	{
-		"chinese": "它不是重要的对我来说，所以我不必现在做这件事情",
+		"chinese": "它不是重要的对我来说所以我不必现在做这件事情",
 		"english": "It is not important for me so I don't have to do it now",
 		"soundmark": "/ɪt/ /ɪz/ /nɑt/ /ɪm'pɔrtnt/ /fɝ/ /mi/ /so/ /aɪ/ /dont/ /hæv/ /tə/ /du/ /ɪt/ /naʊ/"
 	},
