@@ -1,5 +1,5 @@
 # 使用官方 Node.js 镜像作为基础镜像
-FROM node:lts
+FROM node:20.10.0
 
 # 安装 pnpm
 RUN npm install -g pnpm

@@ -12,22 +12,9 @@ Note that this project depends on docker, so make sure that docker is installed 
 
 1. start application
 	```shell
-	pnpm dev
+	pnpm docker:start
 	```
-2. start database
-	```shell
-	pnpm db:start 
-	```
-3. init data of database (It only needs to be executed the first time the database is created)
+2. init data of database (It only needs to be executed the first time the database is created)
 	```shell
 	pnpm db:init
 	```
-   
-
-## Technology stack
-
-- nextjs
-- prisma
-- mysql
-- zustand
-
