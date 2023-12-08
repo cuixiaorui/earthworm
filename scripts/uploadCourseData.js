@@ -7,22 +7,11 @@ const { PrismaClient } = require("@prisma/client");
 const path = require("path");
 const dotenv = require("dotenv");
 
-const isDev = process.env.NODE_ENV === "dev" || !process.env.NODE_ENV;
-
-if (isDev) {
-  dotenv.config({
-    path: path.resolve(__dirname, "../.env.local"),
-    override: true,
-  });
-} else if (process.env.NODE_ENV === "prod") {
-  dotenv.config({ path: path.resolve(__dirname, "../.env") });
-} else {
-  console.error(`无效的 NODE_ENV:${process.env.NODE_ENV}`);
-}
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
 (async function () {
   const courses = JSON.parse(
-    fs.readFileSync(path.resolve(__dirname, "./courses.json")),
+    fs.readFileSync(path.resolve(__dirname, "./courses.json"))
   );
   const datasourceUrl = process.env.DATABASE_URL;
 
@@ -38,7 +27,7 @@ if (isDev) {
   for (const { cId, fileName } of courses) {
     const courseDataText = fs.readFileSync(
       path.resolve(__dirname, `./courses/${fileName}.json`),
-      "utf-8",
+      "utf-8"
     );
     const courseData = JSON.parse(courseDataText);
 
@@ -49,7 +38,7 @@ if (isDev) {
         chinese,
         english,
         soundmark,
-        cId,
+        cId
       );
       orderIndex++;
       return result;
