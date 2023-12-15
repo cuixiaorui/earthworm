@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",
-    "docker:start": "docker-compose up",
+    "docker:start": "docker-compose up -d",
+    "docker:stop": "docker-compose stop",
     "db:init": "npx prisma migrate dev && node scripts/createCourses.js && node scripts/uploadCourseData.js",
     "db:update": "node scripts/createCourses.js && node scripts/uploadCourseData.js"
   },
