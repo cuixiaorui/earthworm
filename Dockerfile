@@ -1,6 +1,9 @@
 # 使用官方 Node.js 镜像作为基础镜像
 FROM node:20.10.0
 
+# 设置 taobao 镜像源
+RUN npm config set registry https://registry.npm.taobao.org
+
 # 安装 pnpm
 RUN npm install -g pnpm
 
