@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from "next/link";
 import Image from "next/image";
 export const Header = () => {
   return (
@@ -10,7 +10,7 @@ export const Header = () => {
           </div>
           <h1 className="text-2xl font-bold text-fuchsia-500 ">EarthWorm</h1>
         </div>
-        <div className='flex gap-4 items-center'>
+        <div className="flex gap-4 items-center">
           <Link href="/course">更多课程</Link>
         </div>
       </div>

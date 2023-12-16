@@ -11,7 +11,9 @@ export function CourseCard({
     shadow-lg hover:bg-indigo-700  cursor-pointer 
   flex justify-center items-center transition-colors"
     >
-      <Link className="truncate" href={`/?courseId=${course.id}`}>{course.title}</Link>
+      <Link className="truncate" href={`/?courseId=${course.id}`}>
+        {course.title}
+      </Link>
     </div>
   );
 }

@@ -7,7 +7,7 @@ export function CourseProgress() {
   const max = currentCourse?.statements.length || 0;
   const value = statementIndex + 1;
 
-  const percent = (value / max) * 100
+  const percent = (value / max) * 100;
 
   return (
     <>

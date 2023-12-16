@@ -11,7 +11,7 @@ export function Answer() {
   async function handleToNextStatement() {
     const nextStatementIndex = toNextStatement();
     const cId = currentCourse?.id!;
-    console.log("?????????", cId, nextStatementIndex)
+    console.log("?????????", cId, nextStatementIndex);
     await fetchSaveUserProgress({
       courseId: cId,
       statementIndex: nextStatementIndex,

@@ -3,7 +3,7 @@ import { useAudio } from "react-use";
 
 export function usePlaySound() {
   const { currentStatement } = useCourse();
-  const content = currentStatement?.english || ""
+  const content = currentStatement?.english || "";
   const [audio, state, controls, ref] = useAudio({
     src: `https://dict.youdao.com/dictvoice?audio=${content}&type=1`,
     autoPlay: false,
