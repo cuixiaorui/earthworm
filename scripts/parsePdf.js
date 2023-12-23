@@ -30,7 +30,7 @@ function main(courseFileName) {
       JSON.stringify(result)
     );
 
-    console.log(`写入成功：${courseFileName}`)
+    console.log(`写入成功：${courseFileName}`);
   });
 }
 
@@ -114,7 +114,12 @@ function parseEnglishAndSoundmark(text) {
   const list = text.split(" ");
   const soundmarkdStartIndex = list.findIndex((t) => t.startsWith("/"));
 
-  const english = list.slice(0, soundmarkdStartIndex).join(" ").trim();
+  const english = list
+    .slice(0, soundmarkdStartIndex)
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .join(" ")
+    .trim();
 
   let rawSoundmark = list
     .slice(soundmarkdStartIndex)
