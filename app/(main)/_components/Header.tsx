@@ -13,6 +13,7 @@ export const Header = () => {
         </div>
         <div className="flex gap-4 items-center"></div>
         <div className="flex gap-4 items-center">
+          <Link href="/error-book">错题本</Link>
           <Link href="/course">更多课程</Link>
           <DarkModeBtn />
         </div>

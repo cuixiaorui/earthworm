@@ -6,6 +6,7 @@ import {
   fetchResetUserProgress,
   fetchSaveUserProgress,
 } from "@/actions/userProgress";
+import { fetchSaveErrorStatment } from '@/actions/errorBook';
 
 export type Statement = Prisma.StatementGetPayload<{
   select: {
@@ -21,6 +22,15 @@ export type Course = Prisma.CourseGetPayload<{
   select: { id: true; title: true };
 }> & { statements: Statement[] };
 
+export type ErrorBook = Prisma.ErrorBookGetPayload<{
+  select: {
+    id: true;
+    statementId: true;
+    time: true;
+    statement: true;
+  }
+}>
+
 interface State {
   statementIndex: number;
   currentCourse?: Course;
@@ -28,6 +38,7 @@ interface State {
   setupCourse: (course: Course, statementIndex: number) => void;
   toNextStatement: () => number;
   checkCorrect: (input: string) => boolean;
+  saveCurrentItemToErrorBook: () => void;
 }
 
 export const useCourse = create<State>((set, get) => ({
@@ -64,6 +75,12 @@ export const useCourse = create<State>((set, get) => ({
 
     return nextStatementIndex;
   },
+
+  saveCurrentItemToErrorBook() {
+    const { statementIndex, currentCourse } = get();
+    const statement = currentCourse!.statements[statementIndex];
+    fetchSaveErrorStatment({ statementId: statement.id })
+  }
 }));
 
 export function CourseStoreInitializer({
