@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react'
 
 import type { IErrorStatementItem } from '@/actions/errorBook'
 
-export default async function Course() {
+export default function Course() {
   const [errList, setErrList] = useState<IErrorStatementItem[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
