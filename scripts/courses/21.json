@@ -371,7 +371,7 @@
 	},
 	{
 		"chinese": "我的女儿(现在)正在寻找她的玩具但是我的女儿不能找到她的玩具",
-		"english": "my daughter is looking for her toy, but my daughter can't find her toy",
+		"english": "my daughter is looking for her toy but my daughter can't find her toy",
 		"soundmark": "/maɪ/ /'dɔtɚ/ /ɪz/ /ˈlʊkɪŋ/ /fɝ/ /hɚ/ /tɔɪ/ /bʌt/ /maɪ/ /'dɔtɚ/ /kænt/ /faɪnd/ /hɚ/ /tɔɪ/"
 	},
 	{
@@ -391,7 +391,7 @@
 	},
 	{
 		"chinese": "我的女儿(现在)正在寻找她的玩具但是她不能找到它",
-		"english": "my daughter is looking for her toy, but she can't find it",
+		"english": "my daughter is looking for her toy but she can't find it",
 		"soundmark": "/maɪ/ /'dɔtɚ/ /ɪz/ /ˈlʊkɪŋ/ /fɝ/ /hɚ/ /tɔɪ/ /bʌt/ /ʃi/ /kænt/ /faɪnd/ /ɪt/ /(she，过去时)be was/ /wəz/"
 	},
 	{
@@ -406,7 +406,7 @@
 	},
 	{
 		"chinese": "我的女儿(过去)正在寻找她的玩具但是她(过去)不能找到它",
-		"english": "my daughter was looking for her toy, but she couldn't find it",
+		"english": "my daughter was looking for her toy but she couldn't find it",
 		"soundmark": "/maɪ/ /'dɔtɚ/ /wəz/ /ˈlʊkɪŋ/ /fɝ/ /hɚ/ /tɔɪ/ /bʌt/ /ʃi/ /kʊdnt/ /faɪnd/ /ɪt/"
 	},
 	{
@@ -631,7 +631,7 @@
 	},
 	{
 		"chinese": "如果你认真地听你可以听到一些音乐",
-		"english": "if you listen carefully, you can hear some music",
+		"english": "if you listen carefully you can hear some music",
 		"soundmark": "/ɪf/ /ju/ /'lɪsn/ /'kɛrfəli/ /ju/ /kæn/ /hɪr/ /səm/ /'mjuzɪk/"
 	},
 	{
@@ -686,12 +686,12 @@
 	},
 	{
 		"chinese": "你可以听见一把吉他在背景里",
-		"english": "you can hear a guitar in the",
+		"english": "you can hear a guitar in the background",
 		"soundmark": "/ju/ /kæn/ /hɪr/ /ə/ /ɡɪ'tɑr/ /ɪn/ /ðə/ /background/ /'bækɡraʊnd/"
 	},
 	{
 		"chinese": "如果你认真地听这段音乐你可以听见一把吉他在背景里",
-		"english": "if you listen to the music carefully , you can hear a guitar in the background",
+		"english": "if you listen to the music carefully you can hear a guitar in the background",
 		"soundmark": "/ɪf/ /ju/ /'lɪsn/ /tə/ /ðə/ /'mjuzɪk/ /'kɛrfəli/ /ju/ /kæn/ /hɪr/ /ə/ /ɡɪ'tɑr/ /ɪn/ /ðə/ /'bækɡraʊnd/"
 	},
 	{
@@ -756,7 +756,7 @@
 	},
 	{
 		"chinese": "如果你不认真地听你将会什么都听不到",
-		"english": "if you don't listen carefully, you will hear nothing",
+		"english": "if you don't listen carefully you will hear nothing",
 		"soundmark": "/ɪf/ /ju/ /dont/ /'lɪsn/ /'kɛrfəli/ /ju/ /wɪl/ /hɪr/ /'nʌθɪŋ/"
 	}
 ]
