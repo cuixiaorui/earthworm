@@ -25,10 +25,7 @@ export const useSession = () => {
     refreshSession();
   }, []);
   const logout = useCallback(() => {
-    fetch("/api/session", {
-      method: "POST",
-      body: JSON.stringify({ action: "logout" }),
-    });
+    fetch("/api/session?action=logout");
   }, []);
 
   const register = useCallback(async (req: ResgiterReq) => {
@@ -40,10 +37,8 @@ export const useSession = () => {
       body: JSON.stringify({ ...req, type: "register" }),
     });
     const data = await res.json();
-    if (data.error !== null) {
-      throw new Error(data.error);
-    }
     refreshSession();
+    return data.error as string | null;
   }, []);
 
   const login = useCallback(async (req: LoginReq) => {
@@ -55,10 +50,8 @@ export const useSession = () => {
       body: JSON.stringify({ ...req, type: "login" }),
     });
     const data = await res.json();
-    if (data.error !== null) {
-      throw new Error(data.error);
-    }
     refreshSession();
+    return data.error as string | null;
   }, []);
 
   return { session, logout, login, register };
