@@ -19,7 +19,7 @@ model User {
   progress       UserProgress?
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
-  userProgressId Int
+  userProgressId Int?
 }
 
 model Course {
