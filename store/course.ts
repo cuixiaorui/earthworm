@@ -6,6 +6,7 @@ import {
   fetchResetUserProgress,
   fetchSaveUserProgress,
 } from "@/actions/userProgress";
+import { SessionData } from "../actions/user";
 
 export type Statement = Prisma.StatementGetPayload<{
   select: {
@@ -69,14 +70,17 @@ export const useCourse = create<State>((set, get) => ({
 export function CourseStoreInitializer({
   course,
   statementIndex,
+  session,
 }: {
   course: Course;
   statementIndex: number;
+  session: SessionData;
 }) {
   const { setupCourse, currentCourse } = useCourse();
   const initialized = useRef(false);
 
   useEffect(() => {
+    if (!session.isLogin) return;
     if (!currentCourse) return;
 
     if (course.id === currentCourse.id) {
@@ -84,13 +88,14 @@ export function CourseStoreInitializer({
     }
     // 这里是从 summary 面板进入下一关  所以要从零开始
     const lastCourseId = currentCourse.id;
-    fetchResetUserProgress({ courseId: lastCourseId! });
+    fetchResetUserProgress({ courseId: lastCourseId!, userId: session.userId });
     setupCourse(course, 0);
     fetchSaveUserProgress({
       courseId: course.id,
       statementIndex: 0,
+      userId: session.userId,
     });
-  }, [course.id]);
+  }, [course.id, session]);
 
   // 一开始的时候必须需要赋值  不然其他 children 组件会获取不到 useCourse 的值
   // 不能在 useEffect(,[]) 中调用 因为其他 children 获取 course 的时机要早于 useEffect

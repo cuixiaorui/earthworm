@@ -5,26 +5,30 @@ import { Course } from "@prisma/client";
 export async function fetchSaveUserProgress({
   courseId,
   statementIndex,
+  userId,
 }: {
   courseId: number;
   statementIndex: number;
+  userId: number;
 }) {
   return await prisma.userProgress.upsert({
     where: { courseId },
     update: { statementIndex, active: true },
-    create: { courseId, statementIndex, active: true },
+    create: { courseId, statementIndex, active: true, userId },
   });
 }
 
 export async function fetchResetUserProgress({
   courseId,
+  userId,
 }: {
   courseId: number;
+  userId: number;
 }) {
   return await prisma.userProgress.upsert({
     where: { courseId },
     update: { statementIndex: 0, active: false },
-    create: { courseId, statementIndex: 0, active: false },
+    create: { courseId, statementIndex: 0, active: false, userId },
   });
 }
 

@@ -4,6 +4,7 @@ import { Main } from "./_components/Main";
 import { redirect } from "next/navigation";
 import { CourseStoreInitializer } from "@/store/course";
 import { fetchStatementIndex } from "@/actions/userProgress";
+import { useSession } from "../../hooks/user";
 
 interface Props {
   searchParams: {
@@ -12,6 +13,7 @@ interface Props {
 }
 
 export default async function Page({ searchParams }: Props) {
+  const { session } = useSession()
   let courseId = +searchParams.courseId;
   if (!courseId) {
     const defaultCourseId = 1;
@@ -26,6 +28,7 @@ export default async function Page({ searchParams }: Props) {
   return (
     <>
       <CourseStoreInitializer
+        session={session}
         course={course!}
         statementIndex={statementIndex}
       ></CourseStoreInitializer>
