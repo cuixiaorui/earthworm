@@ -1,4 +1,5 @@
-import { SessionOptions } from "iron-session";
+import { SessionOptions, getIronSession } from "iron-session";
+import { cookies } from "next/headers";
 
 export type SessionData = {
   username: string;

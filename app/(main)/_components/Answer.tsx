@@ -1,20 +1,23 @@
+'use client';
 import { fetchSaveUserProgress } from "@/actions/userProgress";
 import { usePlaySound } from "../_hooks/playSound";
 import { useCourse } from "@/store/course";
 import { useEffect } from "react";
+import { useSession } from "../../../hooks/user";
 
 export function Answer() {
   const { currentStatement, toNextStatement, currentCourse } = useCourse();
   const { english: word = "", soundmark = "" } = currentStatement || {};
   const { playSound, audio } = usePlaySound();
+  const { session } = useSession()
 
   async function handleToNextStatement() {
     const nextStatementIndex = toNextStatement();
     const cId = currentCourse?.id!;
-    console.log("?????????", cId, nextStatementIndex)
     await fetchSaveUserProgress({
       courseId: cId,
       statementIndex: nextStatementIndex,
+      userId: session.userId
     });
   }
 
@@ -40,7 +43,7 @@ export function Answer() {
         {word}
         <svg
           className="w-7 h-7 inline-block ml-1 cursor-pointer"
-          onClick={() => {}}
+          onClick={() => { }}
           viewBox="0 0 1024 1024"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"

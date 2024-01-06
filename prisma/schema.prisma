@@ -12,14 +12,12 @@ datasource db {
 }
 
 model User {
-  id             Int           @id @default(autoincrement())
-  phone          String        @unique
-  name           String
-  password       String
-  progress       UserProgress?
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
-  userProgressId Int?
+  id        Int      @id @default(autoincrement())
+  phone     String   @unique
+  name      String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Course {
@@ -50,8 +48,7 @@ model UserProgress {
   statementIndex Int
   active         Boolean
   courses        Course? @relation(fields: [courseId], references: [id])
-  user           User    @relation(fields: [userId], references: [id])
-  userId         Int     @unique
+  userId         Int
 
   @@index([courseId], name: "courseId")
 }

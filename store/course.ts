@@ -95,7 +95,7 @@ export function CourseStoreInitializer({
       statementIndex: 0,
       userId: session.userId,
     });
-  }, [course.id, session]);
+  }, [course.id]);
 
   // 一开始的时候必须需要赋值  不然其他 children 组件会获取不到 useCourse 的值
   // 不能在 useEffect(,[]) 中调用 因为其他 children 获取 course 的时机要早于 useEffect

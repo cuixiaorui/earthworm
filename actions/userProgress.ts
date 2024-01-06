@@ -11,8 +11,11 @@ export async function fetchSaveUserProgress({
   statementIndex: number;
   userId: number;
 }) {
+  console.log("fetchSaveUserProgress");
+  console.log(userId);
+  console.log("----------------");
   return await prisma.userProgress.upsert({
-    where: { courseId },
+    where: { courseId, userId },
     update: { statementIndex, active: true },
     create: { courseId, statementIndex, active: true, userId },
   });
@@ -25,16 +28,28 @@ export async function fetchResetUserProgress({
   courseId: number;
   userId: number;
 }) {
+  console.log("fetchResetUserProgress");
+  console.log("userId", userId);
+  console.log("----------------");
   return await prisma.userProgress.upsert({
-    where: { courseId },
-    update: { statementIndex: 0, active: false },
-    create: { courseId, statementIndex: 0, active: false, userId },
+    where: { courseId, userId },
+    update: {
+      statementIndex: 0,
+      active: false,
+    },
+    create: {
+      courseId,
+      statementIndex: 0,
+      active: false,
+      userId: userId,
+    },
   });
 }
 
-export async function fetchActiveCourseId() {
+export async function fetchActiveCourseId(userId: number) {
+  console.log("fetchActiveCourseId");
   const userProgress = await prisma.userProgress.findFirst({
-    where: { active: true },
+    where: { active: true, userId },
   });
 
   return userProgress?.courseId;

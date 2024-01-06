@@ -4,7 +4,9 @@ import { Main } from "./_components/Main";
 import { redirect } from "next/navigation";
 import { CourseStoreInitializer } from "@/store/course";
 import { fetchStatementIndex } from "@/actions/userProgress";
-import { useSession } from "../../hooks/user";
+import { getIronSession } from "iron-session";
+import { cookies } from "next/headers";
+import { SessionData, sessionOptions } from "../../actions/user";
 
 interface Props {
   searchParams: {
@@ -12,11 +14,17 @@ interface Props {
   };
 }
 
+async function getSession() {
+  return getIronSession<SessionData>(cookies(), sessionOptions)
+}
+
 export default async function Page({ searchParams }: Props) {
   let courseId = +searchParams.courseId;
+  const session = await getSession()
   if (!courseId) {
     const defaultCourseId = 1;
-    const activeCourseId = (await fetchActiveCourseId()) || defaultCourseId;
+
+    const activeCourseId = session.isLogin ? ((await fetchActiveCourseId(session.userId)) ?? defaultCourseId) : defaultCourseId;
 
     redirect(`/?courseId=${activeCourseId}`);
   }

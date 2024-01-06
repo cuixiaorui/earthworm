@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { SessionData, defaultSession } from "../actions/user";
+import { useRouter } from "next/router";
 
 type ResgiterReq = {
   name: string;
@@ -14,16 +15,20 @@ type LoginReq = {
 
 export const useSession = () => {
   const [session, setSession] = useState<SessionData>(defaultSession);
+  const [loading, setLoading] = useState(true);
 
   const refreshSession = useCallback(async () => {
     const res = await fetch("/api/session");
     const data = await res.json();
     setSession(data);
+    setLoading(false);
   }, [setSession]);
 
   useEffect(() => {
-    refreshSession();
-  }, []);
+    if (loading) {
+      refreshSession();
+    }
+  }, [loading]);
   const logout = useCallback(() => {
     fetch("/api/session?action=logout");
   }, []);
@@ -37,7 +42,7 @@ export const useSession = () => {
       body: JSON.stringify({ ...req, type: "register" }),
     });
     const data = await res.json();
-    refreshSession();
+    setLoading(true);
     return data.error as string | null;
   }, []);
 
@@ -50,9 +55,9 @@ export const useSession = () => {
       body: JSON.stringify({ ...req, type: "login" }),
     });
     const data = await res.json();
-    refreshSession();
+    setLoading(true);
     return data.error as string | null;
   }, []);
 
-  return { session, logout, login, register };
+  return { session, logout, login, register, loading };
 };
