@@ -11,9 +11,9 @@ export async function fetchSaveUserProgress({
   statementIndex: number;
   userId: number;
 }) {
-  console.log("fetchSaveUserProgress");
-  console.log(userId);
-  console.log("----------------");
+  og("fetchSaveUserProgress");
+  og(userId);
+  og("----------------");
   return await prisma.userProgress.upsert({
     where: { courseId, userId },
     update: { statementIndex, active: true },
@@ -28,9 +28,9 @@ export async function fetchResetUserProgress({
   courseId: number;
   userId: number;
 }) {
-  console.log("fetchResetUserProgress");
-  console.log("userId", userId);
-  console.log("----------------");
+  og("fetchResetUserProgress");
+  og("userId", userId);
+  og("----------------");
   return await prisma.userProgress.upsert({
     where: { courseId, userId },
     update: {
@@ -47,7 +47,7 @@ export async function fetchResetUserProgress({
 }
 
 export async function fetchActiveCourseId(userId: number) {
-  console.log("fetchActiveCourseId");
+  og("fetchActiveCourseId");
   const userProgress = await prisma.userProgress.findFirst({
     where: { active: true, userId },
   });
