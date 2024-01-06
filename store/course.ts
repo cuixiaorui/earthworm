@@ -7,6 +7,7 @@ import {
   fetchSaveUserProgress,
 } from "@/actions/userProgress";
 import { SessionData } from "../actions/user";
+import { useSession } from "../hooks/user";
 
 export type Statement = Prisma.StatementGetPayload<{
   select: {
@@ -70,12 +71,11 @@ export const useCourse = create<State>((set, get) => ({
 export function CourseStoreInitializer({
   course,
   statementIndex,
-  session,
 }: {
   course: Course;
   statementIndex: number;
-  session: SessionData;
 }) {
+  const { session } = useSession();
   const { setupCourse, currentCourse } = useCourse();
   const initialized = useRef(false);
 
