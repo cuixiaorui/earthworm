@@ -2,10 +2,14 @@ import { CourseCard } from "./_components/CourseCard";
 import { fetchCourseList } from "@/actions/course";
 
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default async function Course() {
   const courseList = await fetchCourseList();
-
+  const router = useRouter();
+  const toLearnCourse = (id: number | number) => {
+    router.push(`/?courseId=${id}`)
+  }
   return (
     <div className=" p-16 relative  h-screen flex flex-col ">
       <div>
@@ -33,7 +37,7 @@ export default async function Course() {
         <ul className="flex gap-14  flex-wrap p-1 overflow-y-auto md:justify-start justify-center">
           {courseList.map((course) => {
             return (
-              <li key={course.id}>
+              <li key={course.id} onClick={() => toLearnCourse(course.id)}>
                 <CourseCard course={course}></CourseCard>
               </li>
             );
