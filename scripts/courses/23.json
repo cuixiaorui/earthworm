@@ -540,14 +540,9 @@
 		"soundmark": "/baɪ/ /maɪ'sɛlf/"
 	},
 	{
-		"chinese": "我不知道如何一个人应对生活",
-		"english": "I don't know how to handle",
-		"soundmark": "/aɪ/ /dont/ /no/ /haʊ/ /tə/ /'hændl/ /laɪfs/"
-	},
-	{
-		"chinese": "的挑战",
-		"english": "life's challenges by myself",
-		"soundmark": "/ˈtʃælɪndʒɪz/ /baɪ/ /maɪ'sɛlf/"
+		"chinese": "我不知道如何一个人应对生活的挑战",
+		"english": "I don't know how to handle life's challenges by myself",
+		"soundmark": "/aɪ/ /dont/ /no/ /haʊ/ /tə/ /'hændl/ /laɪfs/ /ˈtʃælɪndʒɪz/ /baɪ/ /maɪ'sɛlf/"
 	},
 	{
 		"chinese": "力量",
