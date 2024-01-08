@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { fetchSaveUserProgress } from "@/actions/userProgress";
 import { usePlaySound } from "../_hooks/playSound";
 import { useCourse } from "@/store/course";
@@ -9,7 +9,7 @@ export function Answer() {
   const { currentStatement, toNextStatement, currentCourse } = useCourse();
   const { english: word = "", soundmark = "" } = currentStatement || {};
   const { playSound, audio } = usePlaySound();
-  const { session } = useSession()
+  const { session } = useSession();
 
   async function handleToNextStatement() {
     const nextStatementIndex = toNextStatement();
@@ -17,13 +17,15 @@ export function Answer() {
     await fetchSaveUserProgress({
       courseId: cId,
       statementIndex: nextStatementIndex,
-      userId: session.userId
+      userId: session.userId,
     });
   }
 
   useEffect(() => {
-    playSound();
-  }, []);
+    if (session.isLogin) {
+      playSound();
+    }
+  }, [session.isLogin]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -37,13 +39,17 @@ export function Answer() {
     };
   }, []);
 
+  if (!session.isLogin) {
+    return <div>loading...</div>;
+  }
+
   return (
     <div className="text-center mb-20 mt-10">
       <div className="text-5xl mb-3 text-fuchsia-500 dark:text-gray-50">
         {word}
         <svg
           className="w-7 h-7 inline-block ml-1 cursor-pointer"
-          onClick={() => { }}
+          onClick={() => {}}
           viewBox="0 0 1024 1024"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"

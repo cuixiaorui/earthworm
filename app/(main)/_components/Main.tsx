@@ -6,8 +6,6 @@ import { Tips } from "./Tips";
 import { CourseProgress } from "./CourseProgress";
 import { useCourse } from "@/store/course";
 import { Summary } from "./Summary";
-import { useSession } from "../../../hooks/user";
-import { useRouter } from "next/navigation";
 
 export function Main() {
   const [mode, setMode] = useState<"Question" | "Answer" | "Summary">(

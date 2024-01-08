@@ -60,5 +60,23 @@ export async function fetchStatementIndex(
 }
 
 export async function resetProgress(userId: number) {
-  const userProgress = await prisma.userProgress.findMany({});
+  const userProgress = await prisma.userProgress.findMany({
+    where: {
+      userId,
+    },
+  });
+
+  if (userProgress.length <= 1) return;
+  const hasActive = userProgress.some((progress) => progress.active);
+  if (!hasActive) return;
+
+  await prisma.userProgress.updateMany({
+    where: {
+      userId,
+      courseId: 1,
+    },
+    data: {
+      active: true,
+    },
+  });
 }
