@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { rewriteLocalStorageSetItem } from "@/lib/utils";
 
 export const DarkModeBtn = () => {
   const [isDark, setIsDark] = useState(false);
@@ -10,6 +11,10 @@ export const DarkModeBtn = () => {
     const initialIsDark = localStorage.getItem("isDarkMode") === "true";
     root.classList.toggle("dark", initialIsDark);
     setIsDark(initialIsDark);
+  }, []);
+
+  useEffect(() => {
+    rewriteLocalStorageSetItem();
   }, []);
 
   const handleThemeChange = () => {
