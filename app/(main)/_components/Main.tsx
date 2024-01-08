@@ -31,12 +31,6 @@ export function Main() {
   }, [statementIndex]);
 
 
-  const { session, loading } = useSession()
-  const router = useRouter()
-  if (!loading && !session.isLogin) {
-    router.push('/auth/login')
-  }
-
   function handleShowAnswer() {
     setMode("Answer");
   }

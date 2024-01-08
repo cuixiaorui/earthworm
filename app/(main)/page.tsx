@@ -21,6 +21,9 @@ async function getSession() {
 export default async function Page({ searchParams }: Props) {
   let courseId = +searchParams.courseId;
   const session = await getSession()
+  if (!session.isLogin) {
+    redirect("/auth/login");
+  }
   if (!courseId) {
     const defaultCourseId = 1;
 
@@ -30,7 +33,7 @@ export default async function Page({ searchParams }: Props) {
   }
 
   const course = await fetchCourse(courseId);
-  const statementIndex = (await fetchStatementIndex(courseId)) || 0;
+  const statementIndex = (await fetchStatementIndex(courseId, session.userId)) || 0;
 
   return (
     <>
