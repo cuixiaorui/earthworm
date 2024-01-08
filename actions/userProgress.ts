@@ -11,6 +11,11 @@ export async function fetchSaveUserProgress({
   statementIndex: number;
   userId: number;
 }) {
+  console.log({
+    courseId,
+    statementIndex,
+    userId,
+  });
   return await prisma.userProgress.upsert({
     where: { courseId, userId },
     update: { statementIndex, active: true },

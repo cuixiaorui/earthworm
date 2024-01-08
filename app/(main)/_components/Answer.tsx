@@ -3,13 +3,13 @@ import { fetchSaveUserProgress } from "@/actions/userProgress";
 import { usePlaySound } from "../_hooks/playSound";
 import { useCourse } from "@/store/course";
 import { useEffect } from "react";
-import { useSession } from "../../../hooks/user";
+import { useUserStore } from "../../../store/user";
 
 export function Answer() {
   const { currentStatement, toNextStatement, currentCourse } = useCourse();
   const { english: word = "", soundmark = "" } = currentStatement || {};
   const { playSound, audio } = usePlaySound();
-  const { session } = useSession();
+  const { session } = useUserStore();
 
   async function handleToNextStatement() {
     const nextStatementIndex = toNextStatement();
@@ -64,7 +64,7 @@ export function Answer() {
       <div className="text-2xl text-slate-600">{soundmark}</div>{" "}
       <button
         className="border-solid border-2 border-slate-400 bg-slate-100 dark:bg-fuchsia-500 rounded-lg mt-8 mb-11 indent-1 h-10 text-2xl pl-10 pr-10 hover:bg-slate-200"
-        onClick={() => handleToNextStatement()}
+        onClick={handleToNextStatement}
       >
         next
       </button>

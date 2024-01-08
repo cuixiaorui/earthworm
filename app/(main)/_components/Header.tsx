@@ -2,20 +2,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { DarkModeBtn } from "./DarkModeBtn";
-import { useSession } from "../../../hooks/user";
-import {
-  useParams,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { resetProgress } from "@/actions/userProgress";
 import { Dialog } from "@/components/ui/dialog";
+import { useUserStore } from "../../../store/user";
 
 export const Header = () => {
-  const { session, logout } = useSession();
+  const { session, logout } = useUserStore();
   const router = useRouter();
-  // const params = useParams();
   const params = useSearchParams();
   const courseId = params.get("courseId");
   const handleLogout = () => {
