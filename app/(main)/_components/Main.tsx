@@ -12,7 +12,7 @@ export function Main() {
     "Question"
   );
 
-  const { currentCourse, statementIndex } = useCourse();
+  const { currentCourse, statementIndex, saveCurrentItemToErrorBook } = useCourse();
 
   useEffect(() => {
     // 说明切换了 course
@@ -28,7 +28,10 @@ export function Main() {
     }
   }, [statementIndex]);
 
-  function handleShowAnswer() {
+  function handleShowAnswer(addToErrBook: boolean = false) {
+    if (addToErrBook === true) {
+      saveCurrentItemToErrorBook()
+    }
     setMode("Answer");
   }
 
@@ -45,7 +48,7 @@ export function Main() {
       <div>{CurrentView}</div>
       <div className="absolute bottom-10 mb-10 w-full flex flex-col items-center">
         <CourseProgress></CourseProgress>
-        <Tips onShowAnswer={handleShowAnswer}></Tips>
+        <Tips onShowAnswer={() => handleShowAnswer(true)}></Tips>
       </div>
     </div>
   );
