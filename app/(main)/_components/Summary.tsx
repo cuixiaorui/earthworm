@@ -31,8 +31,8 @@ export function Summary() {
     })();
   });
 
-  const listener = (e: Event) => {
-    setIsDark((e as CustomEvent).detail.value === "true");
+  const listener = (e: any) => {
+    setIsDark(e.value === "true");
   };
 
   useEffect(() => {
