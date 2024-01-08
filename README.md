@@ -2,7 +2,6 @@
 
 Learning English through the method of constructing sentences with conjunctions
 
-
 ## Start
 
 Start the project based on the following steps
@@ -10,18 +9,19 @@ Start the project based on the following steps
 Note that this project depends on docker, so make sure that docker is installed first.
 
 1. install project dependencies
-	```shell
-	pnpm install
-	```
+
+   ```shell
+   pnpm install
+   ```
 
 2. start application
-	```shell
-	pnpm docker:start
-	```
+   ```shell
+   pnpm docker:start
+   ```
 3. init data of database (It only needs to be executed the first time the database is created)
-	```shell
-	pnpm db:init
-	```
+   ```shell
+   pnpm db:init
+   ```
 
 ## 当发现数据有问题时 如何修改
 
@@ -39,7 +39,7 @@ Note that this project depends on docker, so make sure that docker is installed 
 
 2. 找到 json 文件中的错误语句
 
-   可以直接在当前的 json 文件中搜索即可， 一个对象对应一个 statement 
+   可以直接在当前的 json 文件中搜索即可， 一个对象对应一个 statement
 
 3. 修改 json 后提交 pr
 
@@ -49,4 +49,24 @@ Note that this project depends on docker, so make sure that docker is installed 
 
 后续我会在合并完 pr 后更新线上数据库上的数据完成更新
 
+## 常见问题
 
+### ReferenceError: Request is not defined
+
+使用 `pnpm dev` 或 `pnpm start` 命令启动项目时，可能会出现 `ReferenceError: Request is not defined` 的错误
+
+```
+earthworm\node_modules\.pnpm\next@14.0.3_biqbaboplfbrettd7655fr4n2y\node_modules\next\dist\server\web\spec-extension\request.js:28
+class NextRequest extends Request {
+                          ^
+
+ReferenceError: Request is not defined
+```
+
+这是由于 `Node.js` 版本较低导致的：
+
+> What version of Node.js do you use? If it is 16.x, or less, then you should set it to 18.x, assuming that none of the packages you are using, require lower Node.js versions.
+
+详情参见这里：[ReferenceError: Request is not defined · vercel/next.js · Discussion #47648](https://github.com/vercel/next.js/discussions/47648)
+
+升级到 `18.x` 及以上即可解决问题
