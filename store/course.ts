@@ -6,6 +6,8 @@ import {
   fetchResetUserProgress,
   fetchSaveUserProgress,
 } from "@/actions/userProgress";
+import { SessionData } from "../actions/user";
+import { useUserStore } from "./user";
 
 export type Statement = Prisma.StatementGetPayload<{
   select: {
@@ -73,10 +75,15 @@ export function CourseStoreInitializer({
   course: Course;
   statementIndex: number;
 }) {
+  const { session, init } = useUserStore();
   const { setupCourse, currentCourse } = useCourse();
   const initialized = useRef(false);
+  useEffect(() => {
+    init();
+  }, []);
 
   useEffect(() => {
+    if (!session.isLogin) return;
     if (!currentCourse) return;
 
     if (course.id === currentCourse.id) {
@@ -84,11 +91,12 @@ export function CourseStoreInitializer({
     }
     // 这里是从 summary 面板进入下一关  所以要从零开始
     const lastCourseId = currentCourse.id;
-    fetchResetUserProgress({ courseId: lastCourseId! });
+    fetchResetUserProgress({ courseId: lastCourseId!, userId: session.userId });
     setupCourse(course, 0);
     fetchSaveUserProgress({
       courseId: course.id,
       statementIndex: 0,
+      userId: session.userId,
     });
   }, [course.id]);
 

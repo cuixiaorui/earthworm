@@ -28,6 +28,7 @@ export function Main() {
     }
   }, [statementIndex]);
 
+
   function handleShowAnswer() {
     setMode("Answer");
   }

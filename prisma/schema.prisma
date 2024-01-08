@@ -2,13 +2,22 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "linux-musl"] //  <---- important to support Prisma Query engine in Alpine linux, otherwise "PrismaClientInitializationError2 [PrismaClientInitializationError]: Query engine binary for current platform "linux-musl" could not be found."
 }
 
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  phone     String   @unique
+  name      String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Course {
@@ -39,6 +48,7 @@ model UserProgress {
   statementIndex Int
   active         Boolean
   courses        Course? @relation(fields: [courseId], references: [id])
+  userId         Int
 
   @@index([courseId], name: "courseId")
 }
