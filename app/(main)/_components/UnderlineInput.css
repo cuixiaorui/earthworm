@@ -4,31 +4,40 @@
   flex-wrap: wrap;
   justify-content: center;
   max-width: 80vw;
-  position: relative;
   margin-top: 8px;
 }
 
 .code-box .code-item {
-  min-width: 10vw;
+  position: relative;
   min-height: 6vh;
   text-align: center;
   font-size: 4vw;
+  color: transparent;
   transition: border 0.3s;
   box-sizing: border-box;
+  padding: 0 1vw;
   margin-right: 8px;
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  overflow: hidden;
+}
+
+.code-box .code-value {
+  position: absolute;
+  width: 100%;
 }
 
 .code-box .code-input {
   position: absolute;
+  bottom: -8px;
+  z-index: -1;
   width: 100%;
-  
-  height: 100%;
-  opacity: 0;
+  outline: none;
+  text-align: center;
+  background: transparent;
 }
 
 .active {
-  border-bottom: 3px solid #1E80FF !important;
+  border-bottom-color: #1e80ff !important;
 }
