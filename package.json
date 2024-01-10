@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "pm:start": "pm2 start ecosystem.config.js",
     "lint": "next lint",
     "postinstall": "prisma generate",
     "docker:start": "docker-compose up -d",
