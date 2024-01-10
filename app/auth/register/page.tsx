@@ -30,7 +30,7 @@ const registerSchema = z
 
 type Schema = z.infer<typeof registerSchema>;
 
-export default () => {
+function Register() {
   const { register: reigsterUser } = useUserStore();
   const { toast } = useToast();
   const router = useRouter();
@@ -115,4 +115,7 @@ export default () => {
       </div>
     </>
   );
-};
+}
+
+export default Register
+

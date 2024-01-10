@@ -20,7 +20,7 @@ const loginSchema = z.object({
 
 type LoginSchema = z.infer<typeof loginSchema>;
 
-export default () => {
+function Login() {
   const { login } = useUserStore();
   const { toast } = useToast();
   const router = useRouter();
@@ -92,4 +92,7 @@ export default () => {
       </div>
     </>
   );
-};
+}
+
+export default Login
+
