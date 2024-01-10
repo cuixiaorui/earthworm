@@ -2,7 +2,6 @@
 
 Learning English through the method of constructing sentences with conjunctions
 
-
 ## Start
 
 Start the project based on the following steps
@@ -10,18 +9,34 @@ Start the project based on the following steps
 Note that this project depends on docker, so make sure that docker is installed first.
 
 1. install project dependencies
-	```shell
-	pnpm install
-	```
+
+   ```shell
+   pnpm install
+   ```
 
 2. start application
-	```shell
-	pnpm docker:start
-	```
-3. init data of database (It only needs to be executed the first time the database is created)
-	```shell
-	pnpm db:init
-	```
+
+   ```shell
+   pnpm docker:start
+   ```
+
+3. stop application
+
+   ```shell
+   pnpm docker:stop
+   ```
+
+4. init data of database (It only needs to be executed the first time the database is created)
+
+   ```shell
+   pnpm db:init
+   ```
+
+5. if you want to start mysql locally separately for debugging, you can execute
+
+   ```shell
+   pnpm docker:mysql
+   ```
 
 ## 当发现数据有问题时 如何修改
 
@@ -39,7 +54,7 @@ Note that this project depends on docker, so make sure that docker is installed 
 
 2. 找到 json 文件中的错误语句
 
-   可以直接在当前的 json 文件中搜索即可， 一个对象对应一个 statement 
+   可以直接在当前的 json 文件中搜索即可， 一个对象对应一个 statement
 
 3. 修改 json 后提交 pr
 
@@ -48,5 +63,3 @@ Note that this project depends on docker, so make sure that docker is installed 
 ### 数据的更新
 
 后续我会在合并完 pr 后更新线上数据库上的数据完成更新
-
-
