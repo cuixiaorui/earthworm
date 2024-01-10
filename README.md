@@ -70,3 +70,17 @@ ReferenceError: Request is not defined
 详情参见这里：[ReferenceError: Request is not defined · vercel/next.js · Discussion #47648](https://github.com/vercel/next.js/discussions/47648)
 
 升级到 `18.x` 及以上即可解决问题
+
+### 贡献指北
+
+由于修改、调试项目需要 mysql 服务，这里我们可以只用 docker 跑个 mysql 服务
+```bash
+docker compose -f docker-compose-dev.yaml up -d
+```
+如果是老版本 docker 应该是`docker-compose -f docker-compose-dev.yaml up -d`  
+然后顺序执行下列命令即可
+```bash
+pnpm install
+pnpm db:init
+pnpm dev
+```
