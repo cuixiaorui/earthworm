@@ -50,3 +50,16 @@ Note that this project depends on docker, so make sure that docker is installed 
 后续我会在合并完 pr 后更新线上数据库上的数据完成更新
 
 
+### 贡献指北
+
+由于修改、调试项目需要 mysql 服务，这里我们可以只用 docker 跑个 mysql 服务
+```bash
+docker compose -f docker-compose-dev.yaml up -d
+```
+如果是老版本 docker 应该是`docker-compose -f docker-compose-dev.yaml up -d`  
+然后顺序执行下列命令即可
+```bash
+pnpm install
+pnpm db:init
+pnpm dev
+```
