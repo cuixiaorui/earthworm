@@ -15,10 +15,19 @@ Note that this project depends on docker, so make sure that docker is installed 
    ```
 
 2. start application
+
    ```shell
    pnpm docker:start
    ```
-3. init data of database (It only needs to be executed the first time the database is created)
+
+3. stop application
+
+   ```shell
+   pnpm docker:stop
+   ```
+
+4. init data of database (It only needs to be executed the first time the database is created)
+
    ```shell
    pnpm db:init
    ```
@@ -73,13 +82,21 @@ ReferenceError: Request is not defined
 
 ### 贡献指北
 
-由于修改、调试项目需要 mysql 服务，这里我们可以只用 docker 跑个 mysql 服务
-```bash
+由于本地调试、修改项目时需要使用到 mysql 服务，这里我们可以只用 docker 跑个 mysql 服务
+
+```shell
 docker compose -f docker-compose-dev.yaml up -d
+
+# 老版本 docker 兼容命令
+docker-compose -f docker-compose-dev.yaml up -d
+
+# 或者可以通过 package.json 的命令来启动
+pnpm docker:mysql
 ```
-如果是老版本 docker 应该是`docker-compose -f docker-compose-dev.yaml up -d`  
+
 然后顺序执行下列命令即可
-```bash
+
+```shell
 pnpm install
 pnpm db:init
 pnpm dev
