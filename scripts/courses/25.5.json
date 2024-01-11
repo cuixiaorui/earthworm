@@ -66,7 +66,7 @@
 	},
 	{
 		"chinese": "一些建议",
-		"english": "some advie",
+		"english": "some advice",
 		"soundmark": "/səm/ /əd'vaɪs/"
 	},
 	{
@@ -270,8 +270,8 @@
 		"soundmark": "/ju/ /kæn/ /hænd/ /mi/ /ðə/ /naɪf/"
 	},
 	{
-		"chinese": "你可以递给我那把刀吗？ can you hand me the knife？",
-		"english": "",
+		"chinese": "你可以递给我那把刀吗?",
+		"english": " can you hand me the knife",
 		"soundmark": "/kæn/ /ju/ /hænd/ /mi/ /ðə/ /naɪf/"
 	},
 	{
@@ -281,7 +281,7 @@
 	},
 	{
 		"chinese": "你可以（礼貌版）递给我那把刀吗？",
-		"english": "could you hand me the knife？",
+		"english": "could you hand me the knife",
 		"soundmark": "/kʊd/ /ju/ /hænd/ /mi/ /ðə/ /naɪf/"
 	},
 	{
