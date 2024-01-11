@@ -21,7 +21,7 @@ const registerSchema = z
       .string()
       .min(6, "密码长度必须在6-20位之间")
       .max(20, "密码长度必须在6-20位之间"),
-    name: z.string().min(2, "昵称早小2位").max(20, "昵称长度不能大于20位"),
+    name: z.string().min(2, "昵称最少2位").max(20, "昵称长度不能大于20位"),
   })
   .refine((data) => data.password === data.confirmPassword, {
     path: ["confirmPassword"],
