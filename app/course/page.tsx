@@ -14,8 +14,8 @@ export default async function Course() {
             viewBox="0 0 24 24"
             width="1.2em"
             height="1.2em"
-            className="absolute right-20 top-5 mr-2 h-7 w-7 cursor-pointer 
-         text-gray-400 dark:text-indigo-500"
+            className="absolute right-20 top-5 mr-2 h-7 w-7 cursor-pointer
+            text-gray-400 dark:text-indigo-500"
           >
             <path
               fill="none"
@@ -27,7 +27,7 @@ export default async function Course() {
             ></path>
           </svg>
         </Link>
-        <h1 className="m-4 text-3xl text-indigo-500 ml-0 "> English course </h1>
+        <h1 className="m-4 text-3xl text-indigo-500 ml-0 "> English Course </h1>
       </div>
       <div className="overflow-y-auto scrollbar-hide h-full">
         <ul className="flex gap-14  flex-wrap p-1 overflow-y-auto md:justify-start justify-center">

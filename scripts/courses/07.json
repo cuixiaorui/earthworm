@@ -191,7 +191,7 @@
 	},
 	{
 		"chinese": "他们不打算和他一起待在这里",
-		"english": "they don't plan to stay here with",
+		"english": "they don't plan to stay here with him",
 		"soundmark": "/ðe/ /dont/ /plæn/ /tə/ /ste/ /hɪr/ /wɪð/ /hɪm/ /him/"
 	},
 	{
@@ -430,7 +430,7 @@
 		"soundmark": "/ʃi/ /ˈdʌznt/ /plæn/ /tə/ /liv/ /ðə/ /'kʌntri/ /nɛkst/ /mʌnθ/"
 	},
 	{
-		"chinese": "我们打算和他一起待在这里",
+		"chinese": "我们打算",
 		"english": "we plan",
 		"soundmark": "/wi/ /plæn/"
 	},

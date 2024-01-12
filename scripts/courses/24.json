@@ -600,8 +600,8 @@
 		"soundmark": "/ɪt/ /ɪz/ /ɪm'pɑsəbl/"
 	},
 	{
-		"chinese": "在这个房间里举行一次会会议",
-		"english": "（它）是不可能的 it is impossible to hold a meeting in this room",
+		"chinese": "在这个房间里举行一次会议是不可能的",
+		"english": "it is impossible to hold a meeting in this room",
 		"soundmark": "/ɪt/ /ɪz/ /ɪm'pɑsəbl/ /tə/ /hold/ /ə/ /'mitɪŋ/ /ɪn/ /ðɪs/ /rum/"
 	},
 	{
@@ -610,29 +610,9 @@
 		"soundmark": "/bɪ'kɔz/ /ðɪs/ /rum/ /ɪz/ /ˈvɛri/ /smɔl/"
 	},
 	{
-		"chinese": "在这个房间里举行一次会会议",
-		"english": "",
-		"soundmark": "/（它）是不可能的因为这个房/"
-	},
-	{
-		"chinese": "间是非常小的",
+		"chinese": "在这个房间里举行一次会议是不可能的因为这个房间是非常小的",
 		"english": "it is impossible to hold a meeting in this room because this room is very small",
 		"soundmark": "/ɪt/ /ɪz/ /ɪm'pɑsəbl/ /tə/ /hold/ /ə/ /'mitɪŋ/ /ɪn/ /ðɪs/ /rum/ /bɪ'kɔz/ /ðɪs/ /rum/ /ɪz/ /ˈvɛri/ /smɔl/"
-	},
-	{
-		"chinese": "在这个房间里举行一次会会议",
-		"english": "",
-		"soundmark": "/（它）是不可能的因为它是非/"
-	},
-	{
-		"chinese": "常小的",
-		"english": "it is impossible to hold a meeting in this room because it is very small",
-		"soundmark": "/ɪt/ /ɪz/ /ɪm'pɑsəbl/ /tə/ /hold/ /ə/ /'mitɪŋ/ /ɪn/ /ðɪs/ /rum/ /bɪ'kɔz/ /ɪt/ /ɪz/ /ˈvɛri/ /smɔl/"
-	},
-	{
-		"chinese": "会议",
-		"english": "meeting",
-		"soundmark": "/'mitɪŋ/"
 	},
 	{
 		"chinese": "握；容纳；举行",

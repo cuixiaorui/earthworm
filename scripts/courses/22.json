@@ -645,7 +645,7 @@
 		"soundmark": "/tə/ /se/"
 	},
 	{
-		"chinese": "你(过去)......了什么？",
+		"chinese": "你(过去)......了什么",
 		"english": "what did you",
 		"soundmark": "/wɑt/ /dɪd/ /ju/"
 	},
@@ -660,7 +660,7 @@
 		"soundmark": "/tə/ /lɝn/"
 	},
 	{
-		"chinese": "你(过去)......了什么？",
+		"chinese": "你(过去)......了什么",
 		"english": "what did you",
 		"soundmark": "/wɑt/ /dɪd/ /ju/"
 	},
@@ -675,7 +675,7 @@
 		"soundmark": "/tə/ /faɪnd/"
 	},
 	{
-		"chinese": "你(过去)......了什么？",
+		"chinese": "你(过去)......了什么",
 		"english": "what did you",
 		"soundmark": "/wɑt/ /dɪd/ /ju/"
 	},
@@ -690,7 +690,7 @@
 		"soundmark": "/tə/ /hɪr/"
 	},
 	{
-		"chinese": "你(过去)......了什么？",
+		"chinese": "你(过去)......了什么",
 		"english": "what did you",
 		"soundmark": "/wɑt/ /dɪd/ /ju/"
 	},
@@ -705,7 +705,7 @@
 		"soundmark": "/tə/ /si/"
 	},
 	{
-		"chinese": "你(过去)......了什么？",
+		"chinese": "你(过去)......了什么",
 		"english": "what did you",
 		"soundmark": "/wɑt/ /dɪd/ /ju/"
 	},
@@ -741,27 +741,27 @@
 	},
 	{
 		"chinese": "你(过去)如何......？",
-		"english": "how did you......",
+		"english": "how did you",
 		"soundmark": "/haʊ/ /dɪd/ /ju/"
 	},
 	{
 		"chinese": "你(过去)为什么......？",
-		"english": "why did you......",
+		"english": "why did you",
 		"soundmark": "/waɪ/ /dɪd/ /ju/"
 	},
 	{
 		"chinese": "你(过去)什么时候......？",
-		"english": "when did you......",
+		"english": "when did you",
 		"soundmark": "/wɛn/ /dɪd/ /ju/"
 	},
 	{
 		"chinese": "你(过去)在哪里......？",
-		"english": "where did you......",
+		"english": "where did you",
 		"soundmark": "/wɛr/ /dɪd/ /ju/"
 	},
 	{
 		"chinese": "你(过去)......了什么？",
-		"english": "what did you......",
+		"english": "what did you",
 		"soundmark": "/wɑt/ /dɪd/ /ju/"
 	}
 ]

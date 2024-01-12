@@ -385,14 +385,9 @@
 		"soundmark": "/wɛn/ /ju/ /liv/"
 	},
 	{
-		"chinese": "不要忘记支付账单当你离开的",
-		"english": "don't forget to pay the bill when",
-		"soundmark": "/dont/ /fɚ'ɡɛt/ /tə/ /pe/ /ðə/ /bɪl/ /wɛn/ /ju/"
-	},
-	{
-		"chinese": "时候",
-		"english": "you leave",
-		"soundmark": "/liv/"
+		"chinese": "不要忘记支付账单当你离开的时候",
+		"english": "don't forget to pay the bill when you leave",
+		"soundmark": "/dont/ /fɚ'ɡɛt/ /tə/ /pe/ /ðə/ /bɪl/ /wɛn/ /ju/ /liv/"
 	},
 	{
 		"chinese": "记得支付账单当你离开的时候",
