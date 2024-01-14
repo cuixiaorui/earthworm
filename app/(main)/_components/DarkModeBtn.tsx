@@ -10,7 +10,7 @@ export const DarkModeBtn = () => {
     console.log(initialIsDark);
     root.classList.toggle("dark", initialIsDark);
     setIsDark(initialIsDark);
-  });
+  },[]);
 
   const handleThemeChange = () => {
     const root = window.document.documentElement;
