@@ -141,8 +141,8 @@
 	},
 	{
 		"chinese": "茶",
-		"english": "be were",
-		"soundmark": "/wɚ/"
+		"english": "tea",
+		"soundmark": "/ti/"
 	},
 	{
 		"chinese": "他们在花园里（过去）正在喝茶",
@@ -451,7 +451,7 @@
 	},
 	{
 		"chinese": "在卧室里睡觉",
-		"english": "to sleep in the bedroom",
+		"english": "to sleep in the bed room",
 		"soundmark": "/tə/ /slip/ /ɪn/ /ðə/ /'bɛdrum/"
 	},
 	{
