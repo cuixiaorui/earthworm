@@ -49,6 +49,4 @@ model UserProgress {
   active         Boolean
   courses        Course? @relation(fields: [courseId], references: [id])
   userId         Int
-
-  @@index([courseId], name: "courseId")
 }
