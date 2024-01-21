@@ -49,8 +49,8 @@ export const useCourse = create<State>((set, get) => ({
     const { currentStatement } = get();
 
     return (
-      input.toLocaleLowerCase() ===
-      currentStatement?.english.toLocaleLowerCase()
+      input.toLocaleLowerCase().replace(/[!?]$/, "") ===
+      currentStatement?.english.toLocaleLowerCase().replace(/[!?]$/, "") 
     );
   },
 
