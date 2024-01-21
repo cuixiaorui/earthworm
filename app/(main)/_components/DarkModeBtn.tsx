@@ -3,14 +3,14 @@
 import { useEffect, useState } from "react";
 
 export const DarkModeBtn = () => {
-  const [isDark, setIsDark] = useState(false);
-
+  const [isDark, setIsDark] = useState( ()=>localStorage.getItem("isDarkMode") === "true");
   useEffect(() => {
     const root = window.document.documentElement;
     const initialIsDark = localStorage.getItem("isDarkMode") === "true";
+    console.log(initialIsDark);
     root.classList.toggle("dark", initialIsDark);
     setIsDark(initialIsDark);
-  }, []);
+  },[]);
 
   const handleThemeChange = () => {
     const root = window.document.documentElement;
@@ -19,7 +19,7 @@ export const DarkModeBtn = () => {
     setIsDark(newIsDark);
     localStorage.setItem("isDarkMode", String(newIsDark));
   };
-
+  // handleThemeChange()
   return (
     <div
       className="inline-block bg-primary text-white rounded-lg px-4 py-2 hover:bg-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 cursor-pointer select-none"
