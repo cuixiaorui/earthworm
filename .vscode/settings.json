@@ -1,5 +1,8 @@
 {
-	"cSpell.words": [
-		"soundmark"
-	]
+  "cSpell.words": ["soundmark"],
+  "editor.formatOnSave": true,
+  "javascript.format.semicolons": "insert",
+  "prettier.trailingComma": "all",
+  "prettier.singleQuote": false,
+  "prettier.semi": true
 }
