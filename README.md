@@ -2,6 +2,12 @@
 
 Learning English through the method of constructing sentences with conjunctions
 
+## Contributing
+
+Thanks to everyone who has already contributed to earthworm !
+
+<a href="https://github.com/cuixiaorui/earthworm/graphs/contributors"><img src="https://contributors.nn.ci/api?repo=cuixiaorui/earthworm" /></a>
+
 ## Start
 
 Start the project based on the following steps
